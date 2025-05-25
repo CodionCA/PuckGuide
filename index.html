@@ -3,76 +3,222 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Simply Docs Demo | Home</title>
+<title>Puck Guide</title>
   
-<meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
+<meta name="description" content="A simple guide to setting up Puck servers">
 
 <link rel="stylesheet" href="./assets/style.css">
 
-<link rel="icon" href="./assets/images/favicon.png">
-<link rel="apple-touch-icon" href="./assets/images/favicon.png">
-
- <!-- Facebook integration -->
-<meta property="og:title" content="Simply Docs Demo">
-<meta property="og:image" content="./assets/images/OG_image.png">
-<meta property="og:url" content="https://marketingpipeline.github.io/Simply-Docs/">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="Simple.css">
-<meta property="og:description" content="A Simply Docs / Blog Template built using Simple.css.">
-
-<!-- Twitter integration -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Simply Docs | Demo">
-<meta name="twitter:image" content="./assets/images/OG_image.png">
-<meta name="twitter:url" content="https://marketingpipeline.github.io/Simply-Docs/">
-<meta name="twitter:description" content="A Simply Docs / Blog Template built using Simple.css">
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"></script>
+<link rel="icon" href="./assets/images/favicon.jpg">
+<link rel="apple-touch-icon" href="./assets/images/favicon.jpg">
 
   </head>
 <header>
    <nav>
-  
-  <a href="/Simply-Docs/">Home</a>
-  
-  <a href="/Simply-Docs/pages/documentation">Docs</a>
-  
-  <a href="https://github.com/MarketingPipeline/Simply-Docs/archive/refs/heads/main.zip">Download</a>
-  
-  <a href="/Simply-Docs/pages/news">News</a>
-  
-  <a href="https://github.com/MarketingPipeline/Simply-Docs"><svg class="icon" viewBox="0 0 32 32"><path d="M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.347 1.094-0.77 0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993 0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74 1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234 0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070 4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743 7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925 1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z"></path></svg>Github</a>
-  
+  <a href="https://github.com/CodionCA/PuckGuide"><svg class="icon" viewBox="0 0 32 32"><path d="M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.347 1.094-0.77 0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993 0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74 1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234 0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070 4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743 7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925 1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z"></path></svg>Github</a>
 </nav>
+      
+<h1>Puck Guide</h1>
+<p>A quick guide to hosting your own Puck server</p>
 
-      <h1>Simply Docs</h1>
-      <p>A Free Documentation / Blog Template built using Simple.css</p>
-    </header>
+<div class="navigation-buttons">
+  <a href="#simpleGuide">
+    <button>Simple</button>
+  </a>
+  <a href="#advancedGuide">
+    <button>Advanced</button>
+  </a>
+</div>
+
+</header>
+
 <main>
-<h2>Simply Docs / Blog</h2>
-<p>A clean, easy to edit free HTML template that you can use for a personal blog or for documentation purposes for your next project! Some cool features about this template include the following:</p>
-<ul>
-  <li>An amazing looking <code>blog / documentation</code> template.</li>
-  <li>Ready to host on Github Pages!</li>
-  <li>Automagic flipping to dark mode.</li>
-  <li>Fully responsive.</li>
-  <li>Make changes using only standard HTML elements!</li>
-  <li>Easy to edit!</li>
-  <li style="color:blue;">Apply your own CSS style with ease!</li>
-  <li>Super lightweight & <strong>fast</strong>.</li>
-	<a href="/Simply-Docs/pages/documentation#syntax_highlighting"><li>Syntax highlighting (Click to find out more)</li> 
-	</a> 
-	<a href="/Simply-Docs/pages/documentation#markdown_example"><li>Markdown Support! (Click to find out more)</li> 
-	</a> 
-</ul>
+
+<section id="simpleGuide">
+  <h2>Getting Started - The Simple Way</h2>
+  
+  <p>
+    There are TWO different ways of hosting your own Puck server, one is to simply 
+    open your game up normally and select "NEW SERVER" at the bottom of the server 
+    browser menu
+  </p>
+  
+  <div class="image-container">
+    <img src="assets/images/newservermenu.png" alt="Description of image">
+  </div>
+  
+  <div class="server-options">
+    <ul>
+      <li>
+        <strong>Server Type:</strong> Choose between "Self Hosted" or "Dedicated"
+        <ul>
+          <li>
+            <em>Self Hosted means on your own system and network, Dedicated uses Pucks own servers however are limited in Tick rate and can feel quite <a href="#tickrate">
+              sluggish
+            </a> </em>
+          </li>
+        </ul>
+      </li>
+      
+      <li>
+        <strong>Name:</strong> Enter your server name (appears in server browser)
+        <ul>
+          <li>
+            <em>
+              You can use 
+              <a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html">
+                Unity Rich Text
+              </a> 
+              for colours and sizes, be careful of the character limit & do not abuse this
+            </em>
+          </li>
+        </ul>
+      </li>
+      
+      <li>
+        <strong>Port:</strong> Set the port number (default is 7777)
+        <ul>
+          <li>
+            This is the port you will either forward (in your modem/router panel) or 
+            you can enable 
+            <a href="https://github.com/MarketingPipeline/">UPNP</a>
+          </li>
+        </ul>
+      </li>
+      
+      <li>
+        <strong>Maximum Players:</strong> Use slider to set player limit
+      </li>
+      
+      <li>
+        <strong>Password Protected:</strong> Toggle to require password for joining
+      </li>
+      
+      <li>
+        <strong>Password:</strong> Enter password if protection is enabled
+      </li>
+      
+      <li>
+        <strong>VoIP:</strong> Toggle voice chat on/off (checkbox)
+      </li>
+    </ul>
+  </div>
+
+  <div class="notice-box warning" id="tickrate">
+    <h4>⚠️ Important Considerations</h4>
+    <p>
+      <em>
+        This method has a couple downsides. While it's convenient to setup, Puck heavily 
+        relies on good ping, framerate/tick rate and the Dedicated servers Puck offers 
+        are limited to 100hz/100fps. The Self Hosted server relies on you having a solid 
+        network connection and a good system to support the higher refresh rate.
+      </em>
+    </p>
+  </div>
+
+  
+  <div class="help-button">
+    <a href="#portforwardGuide">
+      <button>Not working?</button>
+    </a>
+  </div>
+  
+</section>
+
+<section id="advancedGuide">
+  <h2>The Advanced Way</h2>
+  <p>Want something a little more permanent, higher tick rates and performant?</p>
+  
+  <div class="notice-box info">
+    <h4>What You'll Need</h4>
+    <p>
+      <em>
+        This guide covers setting up a dedicated server using Steam/SteamCMD. You'll need 
+        basic command line knowledge and either a VPS or spare hardware.
+      </em>
+    </p>
+  </div>
+
+  <h3>VPS vs Home Server</h3>
+  <div class="server-comparison">
+    <div class="option">
+      <h4>VPS (Virtual Private Server)</h4>
+      <ul>
+        <li><strong>Pros:</strong> Professional hosting, better uptime, no home network impact</li>
+        <li><strong>Cons:</strong> Monthly cost, requires remote management</li>
+        <li><strong>Recommended for:</strong> 24/7 servers, multiple players, public servers (such as CDL & PHL)</li>
+      </ul>
+    </div>
+    
+    <div class="option">
+      <h4>Home Server/Hardware</h4>
+      <ul>
+        <li><strong>Pros:</strong> No ongoing costs, full control, can use spare hardware</li>
+        <li><strong>Cons:</strong> Uses your internet bandwidth, electricity costs, setup complexity</li>
+        <li><strong>Recommended for:</strong> Friends & family servers, testing, learning, or single location servers</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Choosing an Operating System</h3>
+  <div class="os-recommendations">
+    <ul>
+      <li>
+        <strong>Debian:</strong> Rock solid stability, perfect for beginners
+        <ul>
+          <li><em>Most stable option, great documentation, minimal resource usage</em></li>
+        </ul>
+      </li>
+      
+      <li>
+        <strong>Ubuntu Server:</strong> User-friendly with great community support
+        <ul>
+          <li><em>Easier for newcomers, lots of tutorials available online</em></li>
+        </ul>
+      </li>
+      
+      <li>
+        <strong>Fedora Server:</strong> Modern features and cutting-edge packages
+        <ul>
+          <li><em>Good choice if you want newer software versions</em></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <h3>Port Configuration</h3>
+  <div class="port-setup">
+    <p>You'll need to configure these ports on your server:</p>
+    <ul>
+      <li><strong>Port 7777:</strong> Main game port (UDP)</li>
+      <li><strong>Port 7778:</strong> Query port (UDP)</li>
+    </ul>
+    
+    <div class="notice-box warning">
+      <h4>Port Forwarding Required</h4>
+      <p>
+        <em>
+          Make sure these ports are forwarded in your router settings (for home servers) 
+          or opened in your VPS firewall. Both ports need to be accessible from the internet.
+        </em>
+      </p>
+    </div>
+  </div>
+
+  <h3>Server Setup & Configuration</h3>
+  <div class="setup-steps">
+    <ol>
+        <strong>Coming soon</strong>
+    </ol>
+  </div>
+  
+</section>
+
 </main>
-<a href="https://github.com/MarketingPipeline/Simply-Docs/archive/refs/heads/main.zip"><button>Download This Template</button></a>
-
-
 
 <footer>
-      <p>Simply Docs was created by <a href="https://github.com/MarketingPipeline/">Marketing Pipeline</a> and is licensed under the MIT license.</p>
-  <small>© 2014 Some company name</small>
-      <address>email@email.com</address>
+      <p>Quickly put together by Codion</p>
+  <small>© 2025</small>
     </footer>
    
  <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
