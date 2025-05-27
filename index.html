@@ -272,6 +272,32 @@ chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
     "GameOver": 15
   }
 }</code></pre>
+<div class="notice-blue">
+  <h4>Important Settings</h4>
+  <ul>
+    <li>
+      <strong>Name:</strong> Enter your server name (appears in server browser)
+      <ul>
+        <li><em>You can use <a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html">Unity Rich Text</a> for colors and sizes. Be careful of the character limit and do not abuse this feature.</em></li>
+      </ul>
+    </li>
+    <li>
+      <strong>Port:</strong> Set the port number (default is 7777)
+      <ul>
+        <li>This is the port you will either <a href="#portforwardGuide">forward</a> (in your modem/router panel) or you can enable <a href="#upnpGuide">UPnP</a>.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>targetFrameRate:</strong> The actual FPS the server will attempt to run at. Recommended to set this value 10-20 above tickRate.
+    </li>
+    <li>
+      <strong>serverTickRate:</strong> This is essentially the "data rate" of the server. Recommended values are 240-360Hz+ if your hardware & network can handle it.
+    </li>
+    <li>
+      <strong>clientTickRate:</strong> The rate at which players send input updates to the server (should improve input lag). You can experiment with this value - I set mine to the same as the serverTickRate.
+    </li>
+  </ul>
+</div>
             
             <h3>Step 8: Create systemd Unit</h3>
             <pre><code class="language-bash">nano /etc/systemd/system/puck@.service</code></pre>

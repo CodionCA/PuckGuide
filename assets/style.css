@@ -688,6 +688,14 @@ input[type="color" i] {
   margin: 2rem 0;
 }
 
+.notice-blue {
+  background-color: #16152a;
+  border: 1px solid #6670ff;
+  border-radius: 5px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
 .globalguide {
   background-color: #1a1a1a;
   border: 1px solid #333;
