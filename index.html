@@ -82,9 +82,9 @@
         <strong>Port:</strong> Set the port number (default is 7777)
         <ul>
           <li>
-            This is the port you will either forward (in your modem/router panel) or 
+            This is the port you will either <a href="#portforwardGuide">forward</a> (in your modem/router panel) or 
             you can enable 
-            <a href="#portforwardGuide">UPNP</a>
+            <a href="#upnpGuide">UPNP</a>
           </li>
         </ul>
       </li>
@@ -107,41 +107,54 @@
     </ul>
   </div>
 
-  <div class="notice-box warning" id="tickrate">
-    <h4>⚠️ Important Considerations</h4>
-    <p>
-      <em>
-        This method has a couple downsides. While it's convenient to setup, Puck heavily 
-        relies on good ping, framerate/tick rate and the Dedicated servers Puck offers 
-        are limited to 100hz/100fps. The Self Hosted server relies on you having a solid 
-        network connection and a good system to support the higher refresh rate.
-      </em>
-    </p>
-  </div>
-
-  
   <div class="help-button">
     <a href="#portforwardGuide">
       <button>Not working?</button>
     </a>
   </div>
+
+  <hr>
+
+  <div class="notice" id="tickrate">
+    <h4>⚠️ Important Considerations</h4>
+    <p>
+      <em>
+        This method relies on good ping and framerate. Dedicated servers are limited to 100hz/100fps. 
+        Self-hosted servers need solid network and system specs for higher refresh rates.
+      </em>
+    </p>
+    <p>
+      The videos below show high vs low frame rates. In Puck, physics run server-side, so your 
+      mouse movements are limited by the server's tick rate, causing sluggish controls unless adjusted.
+    </p>
+    <div class="video-container">
+      <video autoplay loop muted playsinline>
+        <source src="assets/images/24fpsexample.mp4" type="video/webm">
+      </video>
+      <video autoplay loop muted playsinline>
+        <source src="assets/images/280fpsexample.mp4" type="video/webm">
+      </video>
+    </div>
+  </div>
+
   
 </section>
 
-<section id="portforwardGuide">
-  <h2>Understanding UPnP & Port Forwarding</h2>
+<section id="portforwardGuide" class="globalguide">
+  <h2>Port Forwarding Setup</h2>
+  
+  
+  <p>If players can't connect to your server, you need to open ports <strong>7777</strong> and <strong>7778</strong> (UDP) on your router.</p>
+
+  <p><strong>Port Forward Setup Example:</strong></p>
   <ul>
+    <li>Protocol: <code>UDP</code></li>
+    <li>External Port: <code>7777</code> and <code>7778</code></li>
+    <li>Internal Port: <code>7777</code> and <code>7778</code></li>
+    <li>Internal IP: Your PC's local IP (find with <code>ipconfig</code> in Windows terminal)</li>
+  </ul>
   
-  <h3>What is UPnP?</h3>
-  <p><strong>Universal Plug and Play (UPnP)</strong> is an intelligent networking feature that automatically handles port forwarding for you. Think of it as your router's built-in assistant that opens the necessary "doors" (ports) for your applications, games, and services to communicate with the internet seamlessly.</p>
-  
-  <h3>How It Works</h3>
-  <p>When enabled, UPnP allows your devices to automatically request port access from your router, modem, or firewall. This eliminates the need for manual configuration and ensures that applications like VoIP services, gaming platforms, and network tools can function properly without technical intervention.</p>
-  
-  <h3>Puck Requirements</h3>
-  <p>For Puck to work correctly, you have <strong>two options</strong>:</p>
-  <p><strong>Option 1: Enable UPnP</strong> - Simply enable UPnP in your router settings for automatic port management</p>
-  <p><strong>Option 2: Manual Port Forwarding</strong> - Forward ports <strong>7777</strong> and <strong>7778</strong> (UDP protocol) to your computer</p>
+  <p><strong>Finding your IP:</strong> Open Command Prompt and type <code>ipconfig</code>. Look for "IPv4 Address" under your network adapter (usually starts with 192.168.x.x).</p>
   
   <h3>Port Forwarding Guides by Router Brand</h3>
   <ul>
@@ -151,10 +164,21 @@
     <li><a href="https://www.tp-link.com/us/support/faq/1379/" target="_blank">TP-Link Router Port Forwarding Guide</a></li>
     <li><a href="https://portforward.com/" target="_blank">Universal Port Forwarding Guide (All Brands)</a></li>
   </ul>
+  <h3 id="upnpGuide">Enabling UPnP</h3>
+    <p><strong>Alternative:</strong> You can enable UPnP instead of manual port forwarding. This is less reliable but automatically handles port forwarding for all applications. Look for a UPnP toggle in your router admin settings (usually at <code>192.168.1.1</code>).</p>
+  <ul>
+  </ul>
+  <div class="notice">
+    <h5>Security Warning</h5>
+    <p>Enabling UPnP can resolve connection issues rather than simply port forwarding, however, this can create security vulnerabilities. A lot of routers have UPnP disabled by default for a reason.</p>
+    <div class="readmoresec">
+      <a href="https://nordvpn.com/blog/what-is-upnp/">
+        <button>Read More</button>
+      </a>
+    </div>
+  </div>
   <h3>Still Can't Connect?</h3>
-  <p><strong>If players still can't connect after port forwarding:</strong></p>
-  <p>First, wait a couple of minutes as router changes can take time to take effect. If the issue persists, check that your PC or device's firewall is also allowing ports 7777 and 7778 through. Windows Defender Firewall and other security software can block these ports even when your router is configured correctly.</p>
-</ul>
+  <p>Check that your PC's firewall is also allowing ports 7777 and 7778 through. Windows Firewall and other security software can block these ports even when your router is configured correctly.</p>
 </section>
 
 <section id="advancedGuide">
@@ -220,20 +244,9 @@
 
   <h3>Port Configuration</h3>
   <div class="port-setup">
-    <p>You'll need to configure these ports on your server:</p>
-    <ul>
-      <li><strong>Port 7777:</strong> Main game port (UDP)</li>
-      <li><strong>Port 7778:</strong> Query port (UDP)</li>
-    </ul>
-    
-    <div class="notice-box warning">
-      <h4>Port Forwarding Required</h4>
-      <p>
-        <em>
-          Make sure these ports are forwarded in your router settings (for home servers) 
-          or opened in your VPS firewall. Both ports need to be accessible from the internet.
-        </em>
-      </p>
+    <p>You'll need to open ports on your router/VPS</p>
+      <a href="#portforwardGuide">
+        <button>Port Forward Guide</button></a>
     </div>
   </div>
 
@@ -243,7 +256,6 @@
         <strong>Coming soon</strong>
     </ol>
   </div>
-  
 </section>
 
 </main>

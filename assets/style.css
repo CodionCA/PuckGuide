@@ -683,14 +683,20 @@ input[type="color" i] {
 
 
 .notice {
-  background: var(--accent-bg);
-  border: 2px solid var(--border);
+  background-color: #2a1515;
+  border: 1px solid #ff6666;
   border-radius: 5px;
   padding: 1.5rem;
   margin: 2rem 0;
 }
 
-
+.globalguide {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
 
 
 code[class*="language-"],
@@ -809,4 +815,32 @@ pre[class*="language-"] {
 
 .token.italic {
 	font-style: italic;
+}
+
+.video-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.video-container video {
+  width: calc(50% - 10px);
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive behavior for smaller screens */
+@media (max-width: 768px) {
+  .video-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .video-container video {
+    width: 100%;
+  }
 }
