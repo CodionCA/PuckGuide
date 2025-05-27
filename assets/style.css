@@ -21,8 +21,6 @@
 
 /* Dark theme */
 
-
-
 @media (prefers-color-scheme: dark) {
   
 	.anchorjs-link {
@@ -701,7 +699,7 @@ input[type="color" i] {
 
 code[class*="language-"],
 pre[class*="language-"] {
-	color: #393A34;
+	color: #d6e3ff;
 	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 	direction: ltr;
 	text-align: left;
