@@ -7,9 +7,9 @@
   --mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 
   /* Default (light) theme */
-  --bg: #fff;
-  --accent-bg: #f5f7ff;
-  --text: #212121;
+  --bg: #bbbee9;
+  --accent-bg: #d5daf1;
+  --text: #150031;
   --text-light: #585858;
   --border: #d8dae1;
   --accent: #0d47a1;
@@ -17,6 +17,23 @@
   --preformatted: #444;
   --marked: #ffdd33;
   --disabled: #efefef;
+
+    /* Notice-specific variables for light mode */
+  --notice-bg: #f7bdbd;
+  --notice-border: #cc5555;
+  --notice-text: #5a1515;
+  
+  --notice-blue-bg: #d0d0ff;
+  --notice-blue-border: #5560cc;
+  --notice-blue-text: #151560;
+  
+  --notice-orange-bg: #fff5f0;
+  --notice-orange-border: #cc3e00;
+  --notice-orange-text: #5a2200;
+  
+  --globalguide-bg: #d4ffe1;
+  --globalguide-border: #b6ff9a;
+  --globalguide-text: var(--text);
 }
 
 /* Dark theme */
@@ -165,13 +182,25 @@ pre[class*="language-"] {
     --code: #f06292;
     --preformatted: #ccc;
     --disabled: #111;
+
+    /* Notice-specific variables for dark mode*/
+    --notice-bg: #2a1515;
+    --notice-border: #ff6666;
+    --notice-text: #dcdcdc;
+    
+    --notice-blue-bg: #16152a;
+    --notice-blue-border: #6670ff;
+    --notice-blue-text: #dcdcdc;
+    
+    --notice-orange-bg: #88470985;
+    --notice-orange-border: #f74e00;
+    --notice-orange-text: #dcdcdc;
+    
+    --globalguide-bg: #1a1a1a;
+    --globalguide-border: #333;
+    --globalguide-text: var(--text);
+    }
   }
-  /* Add a bit of transparancy so light media isn't so glaring in dark mode */
-  img,
-  video {
-    opacity: 0.8;
-  }
-}
 
 html {
   /* Set the font globally */
@@ -681,24 +710,36 @@ input[type="color" i] {
 
 
 .notice {
-  background-color: #2a1515;
-  border: 1px solid #ff6666;
+  background-color: var(--notice-bg);
+  border: 1px solid var(--notice-border);
+  color: var(--notice-text);
   border-radius: 5px;
   padding: 1.5rem;
   margin: 2rem 0;
 }
 
 .notice-blue {
-  background-color: #16152a;
-  border: 1px solid #6670ff;
+  background-color: var(--notice-blue-bg);
+  border: 1px solid var(--notice-blue-border);
+  color: var(--notice-blue-text);
   border-radius: 5px;
   padding: 1.5rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
+}
+
+.notice-orange {
+  background-color: var(--notice-orange-bg);
+  border: 1px solid var(--notice-orange-border);
+  color: var(--notice-orange-text);
+  border-radius: 5px;
+  padding: 1.5rem;
+  margin: 1rem 0;
 }
 
 .globalguide {
-  background-color: #1a1a1a;
-  border: 1px solid #333;
+  background-color: var(--globalguide-bg);
+  border: 1px solid var(--globalguide-border);
+  color: var(--globalguide-text);
   border-radius: 5px;
   padding: 1.5rem;
   margin: 2rem 0;
@@ -707,7 +748,7 @@ input[type="color" i] {
 
 code[class*="language-"],
 pre[class*="language-"] {
-	color: #d6e3ff;
+	color: var(--text);
 	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 	direction: ltr;
 	text-align: left;

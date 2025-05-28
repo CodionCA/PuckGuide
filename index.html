@@ -115,7 +115,8 @@
         <section id="portforwardGuide" class="globalguide">
             <h2>Port Forwarding Setup</h2>
             
-            <p>If players can't connect to your server, you need to open ports <strong>7777</strong> and <strong>7778</strong> (UDP) on your router.</p>
+            <p>If players can't connect to your server, you need to open ports <strong>7777</strong> and <strong>7778</strong> (UDP) on your router. So long as you are not behing a <a href="#cgnat">CGNAT</a>.</p>
+
             
             <p><strong>Access your router's admin panel:</strong> Run <code>ipconfig</code> in Windows Terminal, copy the "Default Gateway" IP address (like 192.168.1.1), paste it into your browser's address bar, then log in using the credentials typically on your router's label.</p>
 
@@ -150,7 +151,22 @@
             </div>
             
             <h3>Still Can't Connect?</h3>
-            <p>Check that your PC's firewall is also allowing ports 7777 and 7778 through. Windows Firewall and other security software can block these ports even when your router is configured correctly.</p>
+            
+            <div class="troubleshooting-step">
+                <h4>Check Your PC Firewall</h4>
+                <p>Your PC's firewall might be blocking the connection even when your router is configured correctly. Make sure Windows Firewall and any other security software are allowing ports 7777 and 7778 through.</p>
+            </div>
+            
+            <div class="troubleshooting-step" id="cgnat">
+                <h4>CGNAT / Double-NAT Issues</h4>
+                <p>If your network is behind a "double-NAT" or CGNAT (Carrier-Grade NAT), port forwarding won't work properly.</p>
+                <p><strong>How to check:</strong> Compare your router's WAN IP address with your public IP from <a href="https://ifconfig.io/" target="_blank">ifconfig.io</a>. If they don't match, you're behind CGNAT.</p>
+                <p><strong>Solution:</strong> Use a paid VPS provider instead (see guides below).</p>
+            </div>
+            
+            <div class="image-container">
+                <img src="assets/images/cgnatexample.png" alt="CGNAT network diagram showing double-NAT configuration">
+            </div>
         </section>
 
         <section id="advancedGuide">
