@@ -12,4 +12,5 @@ Contributions or even full additions would be much appreciated.
 2. Run `npx live-server` to edit locally
 3. Open in your browser at given local url
 
-Built with HTML and Markdown.
+Built with HTML and CSS. 
+Markdown supported. 
