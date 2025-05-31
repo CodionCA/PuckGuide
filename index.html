@@ -13,7 +13,7 @@
 <body>
     <header>
         <nav>
-            <a href="https://github.com/CodionCA/PuckGuide">
+            <a href="https://github.com/CodionCA/PuckGuide" target="_blank">
                 <svg class="icon" viewBox="0 0 32 32">
                     <path d="M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.347 1.094-0.77 0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993 0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74 1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234 0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070 4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743 7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925 1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z"></path>
                 </svg>
@@ -144,7 +144,7 @@
                 <h5>Security Warning</h5>
                 <p>Enabling UPnP can resolve connection issues rather than simply port forwarding, however, this can create security vulnerabilities. A lot of routers have UPnP disabled by default for a reason.</p>
                 <div class="readmoresec">
-                    <a href="https://nordvpn.com/blog/what-is-upnp/">
+                    <a href="https://nordvpn.com/blog/what-is-upnp/" target="_blank">
                         <button>Read More</button>
                     </a>
                 </div>
@@ -171,93 +171,78 @@
 
         <section id="advancedGuide">
             <h2>The Advanced Way</h2>
-
-            <p>Want something a little more permanent, with higher tick rates and more performant?</p>
-            
-            <blockquote>
-                <strong>What You'll Need</strong><br>
-                <em>This guide covers setting up a dedicated server using Steam/SteamCMD. You'll need basic command line knowledge and either a VPS or spare hardware.</em>
-            </blockquote>
+            <p>Want something more permanent, stable, dedicated and more performant?</p>
             
             <h3>VPS vs Home Server</h3>
             
-            <h4>VPS (Virtual Private Server)</h4>
-            <ul>
-                <li><strong>Pros:</strong> Professional hosting, better uptime, no home network impact</li>
-                <li><strong>Cons:</strong> Monthly cost, requires remote management</li>
-                <li><strong>Recommended for:</strong> 24/7 servers, multiple players, public servers (such as CDL & PHL)</li>
-            </ul>
-            
-            <h4>Home Server/Hardware</h4>
-            <ul>
-                <li><strong>Pros:</strong> No ongoing costs, full control, can use spare hardware</li>
-                <li><strong>Cons:</strong> Uses your internet bandwidth, electricity costs, setup complexity</li>
-                <li><strong>Recommended for:</strong> Friends & family servers, testing, learning, or single location servers</li>
-            </ul>
-            
-            <h3>Choosing an Operating System</h3>
-            
-            <p><strong>Debian</strong> - <strong>Recommended and covered in the guide below</strong><br>
-            Rock solid stability, perfect for beginners. Most stable option, great documentation, minimal resource usage.</p>
-            
-            <p><strong>Ubuntu Server</strong><br>
-            User-friendly with great community support. Easier for newcomers, lots of tutorials available online.</p>
-            
-            <p><strong>Fedora Server</strong><br>
-            Modern features and cutting-edge packages. Good choice if you want newer software versions.</p>
+            <p><strong>VPS:</strong> Professional hosting, better uptime, monthly cost. Best for 24/7 public servers (CDL & PHL).</p>
+            <p><strong>Home Server:</strong> No ongoing costs, full control, uses your bandwidth/electricity. Best for friends & family servers.</p>
 
-            <p><strong>Docker Container</strong><br>
-            Easiest to deploy, requires a docker image (coming soon)</p>
+            <h4>VPS Providers</h4>
+            <ul>
+                <li><a href="https://www.vultr.com/?ref=9765895" target="_blank">Vultr</a></li>
+                <p>Vultr is a good provider, they have a lot of locations and are very cheap. Easy to setup and use.</p>
+                <li><a href="https://www.ovhcloud.com/en/vps/" target="_blank">OVH</a></li>
+                <p>OVH is a french provider, they also have a lot of locations and are also very cheap.</p>              
+            </ul>
             
-            <p><strong>Windows Server</strong><br>
-            Easiest to use if you know the interface but much heavier to run. <em>Not recommended for long-term server use.</em></p>
+            <h3>Operating System</h3>
+            
+            <p><strong>Debian (Recommended)</strong> - Stable, beginner-friendly, minimal resources.<br>
+            <strong>Ubuntu Server</strong> - User-friendly, great community support.<br>
+            <strong>Fedora Server</strong> - Modern features, cutting-edge packages.<br>
+            <strong>Docker Container</strong> - Easiest deployment (image coming soon).<br>
+            <strong>Windows Server</strong> - Familiar interface but resource-heavy. <em>Not recommended.</em></p>
             
             <h2>Server Setup & Configuration</h2>
-            
-            <blockquote>
+            <div class="notice-blue">
                 <h4>Prerequisites</h4>
                 <ul>
-                    <li>A Debian-based (Debian 12 bookworm) server with SSH access</li>
-                    <li>Root access (All these commands are executed as root user: <code>su -l</code>)</li>
-                    <li>At least 2GB of memory (each Puck server uses ~300MB)</li>
-                    <li>Basic command line knowledge</li>
+                        <li>A Debian-based (Debian 12 bookworm) server with SSH access</li>
+                        <li>Root access and preferably a dedicated sudo user</li>
+                        <li>At least 2GB of memory (each Puck server uses ~300MB)</li>
+                        <li>Basic command line knowledge</li>
                 </ul>
-            </blockquote>
+                <p>These commands are executed as root user</p>
+                <p>If you are not comfortable with the command line, please use the simple guide above.</p>
+                <p>You can use sudo to run commands as root, but for the sake of simplicity, we will be using <code>su -l</code> for the entire guide.</p>
+                <p>A dedicated puckd user will be created below for the server <a href="https://en.wikipedia.org/wiki/Daemon_(computing)" target="_blank">daemon</a></p>
+            </div>
             
             <h3>Step 1: Update Your System</h3>
-            <pre><code class="language-bash">apt update && apt upgrade -y</code></pre>
+            <pre><code>apt update && apt upgrade -y</code></pre>
             
             <h3>Step 2: Install Prerequisites & SteamCMD</h3>
             <p>Install necessary tools and prepare SteamCMD:</p>
-            <pre><code class="language-bash">apt install software-properties-common
+            <pre><code>apt install software-properties-common
 echo "deb http://deb.debian.org/debian bookworm main contrib non-free" > /etc/apt/sources.list.d/nonfree.list
 dpkg --add-architecture i386
 apt update
 apt install steamcmd</code></pre>
             
             <h3>Step 3: Create Server Download Directory</h3>
-            <pre><code class="language-bash">mkdir -p /srv/puck-download</code></pre>
+            <pre><code>mkdir -p /srv/puck-download</code></pre>
             
             <h3>Step 4: Download Puck Server Files</h3>
             <p>Use SteamCMD to download the server files:</p>
-            <pre><code class="language-bash">steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit</code></pre>
-            <p><strong>Note:</strong> 3481440 is the Steam App ID for Puck's dedicated server. You can verify it on <a href="https://steamdb.info/app/3481440/">SteamDB</a>.</p>
+            <pre><code>steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit</code></pre>
+            <p><strong>Note:</strong> 3481440 is the Steam App ID for Puck's dedicated server. You can verify it on <a href="https://steamdb.info/app/3481440/" target="_blank">SteamDB</a>.</p>
             
             <h3>Step 5: Create System User for Running Server</h3>
             <p>Create a dedicated system user for running the server:</p>
-            <pre><code class="language-bash">adduser --system --no-create-home --group puckd</code></pre>
+            <pre><code>adduser --system --no-create-home --group puckd</code></pre>
             
             <h3>Step 6: Set Up the First Server Instance</h3>
             <p>Create the server directory and assign permissions:</p>
-            <pre><code class="language-bash">mkdir -p /srv/puck/server1
+            <pre><code>mkdir -p /srv/puck/server1
 cp -r /srv/puck-download/* /srv/puck/server1/
 chown -R puckd:puckd /srv/puck/server1
 chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
             
             <h3>Step 7: Create Server Configuration</h3>
-            <pre><code class="language-bash">nano /srv/puck/server1/config.json</code></pre>
+            <pre><code>nano /srv/puck/server1/config.json</code></pre>
             <p>Paste and modify as needed:</p>
-            <pre><code class="language-json">{
+            <pre class="language-json"><code>{
   "port": 7777,
   "pingPort": 7778,
   "name": "My Dedicated Puck Server",
@@ -294,7 +279,7 @@ chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
     <li>
       <strong>Name:</strong> Enter your server name (appears in server browser)
       <ul>
-        <li><em>You can use <a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html">Unity Rich Text</a> for colors and sizes. Be careful of the character limit and do not abuse this feature.</em></li>
+        <li><em>You can use <a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html" target="_blank">Unity Rich Text</a> for colors and sizes. Be careful of the character limit and do not abuse this feature.</em></li>
       </ul>
     </li>
     <li>
@@ -316,9 +301,9 @@ chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
 </div>
             
             <h3>Step 8: Create systemd Unit</h3>
-            <pre><code class="language-bash">nano /etc/systemd/system/puck@.service</code></pre>
+            <pre><code>nano /etc/systemd/system/puck@.service</code></pre>
             <p>Paste:</p>
-            <pre><code class="language-ini">[Unit]
+            <pre class="language-ini"><code>[Unit]
 Description=Puck Dedicated Server - %i
 After=network.target
 
@@ -332,11 +317,11 @@ Restart=on-failure
 WantedBy=multi-user.target</code></pre>
             
             <h3>Step 9: Enable and Start the Server</h3>
-            <pre><code class="language-bash">systemctl daemon-reload
+            <pre><code>systemctl daemon-reload
 systemctl enable puck@server1
 systemctl start puck@server1</code></pre>
             <p>Check status:</p>
-            <pre><code class="language-bash">systemctl status puck@server1
+            <pre><code>systemctl status puck@server1
 journalctl -u puck@server1 -f</code></pre>
             
             <h3>Step 10: Open Firewall Ports</h3>
@@ -345,7 +330,7 @@ journalctl -u puck@server1 -f</code></pre>
             <blockquote>
                 <strong>Install <code>ufw</code> and open required UDP ports</strong>
             </blockquote>
-            <pre><code class="language-bash">apt install ufw
+            <pre><code>apt install ufw
 ufw enable
 ufw allow 7777/udp
 ufw allow 7778/udp</code></pre>
@@ -356,7 +341,7 @@ ufw allow 7778/udp</code></pre>
             <blockquote>
                 <strong>Change ports to one above both, example 7779 & 7780</strong>
             </blockquote>
-            <pre><code class="language-bash">cp -r /srv/puck/server1 /srv/puck/server2
+            <pre><code>cp -r /srv/puck/server1 /srv/puck/server2
 nano /srv/puck/server2/config.json
 systemctl enable puck@server2
 systemctl start puck@server2</code></pre>
