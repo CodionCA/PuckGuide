@@ -234,7 +234,7 @@ apt install steamcmd</code></pre>
             
             <h3>Step 4: Download Puck Server Files</h3>
             <p>Use SteamCMD to download the server files:</p>
-            <pre><code>steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit</code></pre>
+            <pre><code>/usr/games/steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit</code></pre>
             <p><strong>Note:</strong> 3481440 is the Steam App ID for Puck's dedicated server. You can verify it on <a href="https://steamdb.info/app/3481440/" target="_blank">SteamDB</a>.</p>
             
             <h3>Step 5: Create System User for Running Server</h3>
@@ -246,7 +246,9 @@ apt install steamcmd</code></pre>
             <pre><code>mkdir -p /srv/puck/server1
 cp -r /srv/puck-download/* /srv/puck/server1/
 chown -R puckd:puckd /srv/puck/server1
-chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
+chmod +x /srv/puck/server1/start_server.sh
+# Optional, you can start server directly if needed, mods not supported.
+# chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
             
             <h3>Step 7: Create Server Configuration</h3>
             <pre><code>nano /srv/puck/server1/config.json</code></pre>
@@ -280,8 +282,21 @@ chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
     "Replay": 10,
     "PeriodOver": 15,
     "GameOver": 15
-  }
-}</code></pre>
+  },
+  "mods": [
+    {
+      "id": 3493628417,
+      "enabled": false,
+      "clientRequired": true
+    },
+    {
+      "id": 3491056040,
+      "enabled": true,
+      "clientRequired": false
+    }
+  ]
+}
+</code></pre>
 <div class="notice-blue">
   <h4>Important Settings</h4>
   <ul>
@@ -306,6 +321,9 @@ chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
     <li>
       <strong>clientTickRate:</strong> The rate at which players send input updates to the server (should improve input lag). You can experiment with this value - I set mine to the same as the serverTickRate.
     </li>
+    <li>
+      <strong>Mods:</strong> The example configuration will add Toaster's Crispy Shadows (3493628417) as a client-sided mod and GAFURIX' Custom MOTD (3491056040) as a server-sided mod to your server.
+    </li>
   </ul>
 </div>
             
@@ -319,7 +337,7 @@ After=network.target
 [Service]
 WorkingDirectory=/srv/puck/%i
 User=puckd
-ExecStart=/srv/puck/%i/Puck.x86_64 --serverConfigurationPath /srv/puck/%i/config.json
+ExecStart=/srv/puck/%i/start_server.sh --serverConfigurationPath /srv/puck/%i/config.json
 Restart=on-failure
 
 [Install]
