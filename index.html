@@ -184,7 +184,7 @@
             
             <h3>VPS vs Home Server</h3>
             
-            <p><strong>VPS:</strong> Professional hosting, better uptime, monthly cost. Best for 24/7 public servers (CDL & PHL).</p>
+            <p><strong>VPS:</strong> Professional hosting, better uptime, monthly cost. Best for 24/7 public servers (CDL, Toasters Rinks & PHL).</p>
             <p><strong>Home Server:</strong> No ongoing costs, full control, uses your bandwidth/electricity. Best for friends & family servers.</p>
 
             <h4>VPS Providers</h4>
@@ -200,17 +200,42 @@
             <p><strong>Debian (Recommended)</strong> - Stable, beginner-friendly, minimal resources.<br>
             <strong>Ubuntu Server</strong> - User-friendly, great community support.<br>
             <strong>Fedora Server</strong> - Modern features, cutting-edge packages.<br>
-            <strong>Docker Container</strong> - Easiest deployment (image coming soon).<br>
+            <strong>Docker Container</strong> - Easiest deployment (Not available yet).<br>
             <strong>Windows Server</strong> - Familiar interface but resource-heavy. <em>Not recommended.</em></p>
             
             <h2>Server Setup & Configuration</h2>
             <div class="notice-blue">
+                <div style="
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e9ecef;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 16px;
+">
+    <svg style="
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        fill: currentColor;
+        opacity: 0.8;
+    " viewBox="0 0 24 24">
+        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+    </svg>
+    This guide was last updated for Build 202
+</div>
                 <h4>Prerequisites</h4>
                 <ul>
                         <li>A Debian-based (Debian 12 bookworm) server with SSH access</li>
+                            <small style="color: #6c757d;">(Debian 13 has now released but has not been tested, likely the exact same)</small>
                         <li>Root access and preferably a dedicated sudo user</li>
                         <li>At least 2GB of memory (each Puck server uses ~300MB)</li>
                         <li>Basic command line knowledge</li>
+                        
                 </ul>
                 <p>These commands are executed as root user</p>
                 <p>If you are not comfortable with the command line, please use the simple guide above.</p>
@@ -361,16 +386,39 @@ ufw enable
 ufw allow 7777/udp
 ufw allow 7778/udp</code></pre>
             <p>Adjust port numbers based on your configuration.</p>
+
+<hr>
             
-            <h2>Managing Multiple Servers</h2>
-            <p>To run a second server:</p>
+<h2>Managing Multiple Servers</h2>
+            
+            <h3>Step 1: Duplicate Server Files</h3>
+            <p>Copy the existing server instance to create a new one:</p>
+            <pre><code>cp -r /srv/puck/server1 /srv/puck/server2</code></pre>
+            
+            <h3>Step 2: Configure New Server Ports</h3>
+            <p>Edit the configuration file and change the port numbers:</p>
             <blockquote>
                 <strong>Change ports to one above both, example 7779 & 7780</strong>
             </blockquote>
-            <pre><code>cp -r /srv/puck/server1 /srv/puck/server2
-nano /srv/puck/server2/config.json
-systemctl enable puck@server2
-systemctl start puck@server2</code></pre>
+            <pre><code>nano /srv/puck/server2/config.json</code></pre>
+            
+            <h3>Step 3: Set File Permissions</h3>
+            <blockquote>
+                <strong>Mods & Logging will break if you skip this step</strong>
+            </blockquote>
+            <p>Give ownership of the new files to the puckd user:</p>
+            <pre><code>chown -R puckd:puckd /srv/puck/server2</code></pre>
+            
+            <h3>Step 4: Enable Auto-Start</h3>
+            <p>Enable the new server to start automatically on boot:</p>
+            <pre><code>systemctl enable puck@server2</code></pre>
+            
+            <h3>Step 5: Start and Monitor</h3>
+            <p>Start the server:</p>
+            <pre><code>systemctl start puck@server2</code></pre>
+            
+            <p>Check if it's working with logs:</p>
+            <pre><code>journalctl -u puck@server2 -f</code></pre>
             
             <h2>Server Management Commands</h2>
             <ul>
@@ -388,12 +436,14 @@ systemctl start puck@server2</code></pre>
             Double-check firewall and public IP on VPS</p>
 
             <p>Your Puck server should now be live and ready for players.</p>
+
+
         </section>
     </main>
 
     <footer>
         <p>Quickly put together by Codion</p>
-        <small>© 2025</small>
+        <small>2025</small>
     </footer>
 </body>
 <script>
