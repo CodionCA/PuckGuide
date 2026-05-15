@@ -230,8 +230,8 @@
 </div>
                 <h4>Prerequisites</h4>
                 <ul>
-                        <li>A Debian-based (Debian 12 bookworm) server with SSH access</li>
-                            <small style="color: #6c757d;">(Debian 13 has now released but has not been tested, likely the exact same)</small>
+                        <li>A Debian-based (Debian 13 Trixie) server with SSH access</li>
+                            <small style="color: #6c757d;">(Debian 12 Bookworm uses the same/similar steps)</small>
                         <li>Root access and preferably a dedicated sudo user</li>
                         <li>At least 2GB of memory (each Puck server uses ~300MB)</li>
                         <li>Basic command line knowledge</li>
@@ -248,6 +248,9 @@
             
             <h3>Step 2: Install Prerequisites & SteamCMD</h3>
             <p>Install necessary tools and prepare SteamCMD:</p>
+            <blockquote>
+                <strong>On debian you need to add the non-free repo, but on distros like Ubuntu you may not</strong>
+            </blockquote>
             <pre><code>apt install software-properties-common
 echo "deb http://deb.debian.org/debian bookworm main contrib non-free" > /etc/apt/sources.list.d/nonfree.list
 dpkg --add-architecture i386
@@ -307,10 +310,15 @@ chmod +x /srv/puck/server1/Puck</code></pre>
       </ul>
     </li>
     <li>
-      <strong>tickRate:</strong> The actual FPS the server will attempt to run at. Recommended to set this value 10-20 above tickRate.
+      <strong>tickRate:</strong> The actual FPS the server will attempt to run at.
     </li>
     <li>
-      <strong>Mods:</strong> The example configuration will add GAFURIX' Custom MOTD (3721801263) as a server-sided mod to your server.
+    <strong>Mods:</strong> The example configuration has no mods, feel free to browse the workshop and add one like "Gafurix' Custom Motd" in the mods section:
+    <pre><code>{
+"id": "3721801263",
+"isEnabled": true,
+"isClientRequired": false
+}</code></pre>
     </li>
   </ul>
 </div>
