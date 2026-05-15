@@ -168,8 +168,8 @@
 
 				<p>
 					If players can't connect to your server, you need to open ports
-					<strong>30609</strong> (UDP) on your router. So long as you are not
-					behind a <a href="#cgnat">CGNAT</a>.
+					<strong>30609</strong> (TCP & UDP) on your router. So long as you are
+					not behind a <a href="#cgnat">CGNAT</a>.
 				</p>
 
 				<p>
@@ -182,7 +182,7 @@
 
 				<p><strong>Port Forward Setup Example:</strong></p>
 				<ul>
-					<li>Protocol: <code>UDP</code></li>
+					<li>Protocol: <code>TCP (For ping) & UDP (For gameplay)</code></li>
 					<li>Internal Port: <code>30609</code></li>
 					<li>External Port: <code>30609</code></li>
 					<li>
@@ -534,11 +534,13 @@ journalctl -u puck@server1 -f</code></pre>
 				</p>
 
 				<blockquote>
-					<strong>Install <code>ufw</code> and open required UDP port</strong>
+					<strong
+						>Install <code>ufw</code> and open required TCP & UDP port</strong
+					>
 				</blockquote>
 				<pre><code>apt install ufw
 ufw enable
-ufw allow 30609/udp
+ufw allow 30609
 </code></pre>
 				<p>Adjust port number based on your configuration.</p>
 
@@ -556,7 +558,7 @@ ufw allow 30609/udp
 					<strong>Change ports to one above, example 30610 and open it</strong>
 				</blockquote>
 				<pre><code>nano /srv/puck/server2/server_config.json 
-ufw allow 30610/udp</code></pre>
+ufw allow 30610</code></pre>
 
 				<h3>Step 3: Set File Permissions</h3>
 				<blockquote>
