@@ -559,7 +559,8 @@ ufw allow 30609/udp
 					<strong>Change ports to one above, example 30610 and open it</strong>
 				</blockquote>
 				<pre><code>nano /srv/puck/server2/server_config.json 
-ufw allow 30610</code></pre>
+ufw allow 30609/tcp
+ufw allow 30609/udp</code></pre>
 
 				<h3>Step 3: Set File Permissions</h3>
 				<blockquote>
