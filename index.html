@@ -1,286 +1,447 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puck Guide</title>
-    <meta name="description" content="A simple guide to setting up Puck servers">
-    
-    <!-- Discord Embed -->
-    <meta property="og:title" content="Puck Guide">
-    <meta property="og:description" content="Guide for setting up Puck servers - covers in-game setup, port forwarding, Linux servers, modding, troubleshooting, and common issues.">
-    <meta property="og:url" content="https://codionca.github.io/PuckGuide/">
-    <meta property="og:image" content="https://codionca.github.io/PuckGuide/assets/images/favicon.png">
-    <meta property="og:color" content="#fcbb0a">
-    <meta name="theme-color" content="#fcbb0a">
-    
-    <link rel="stylesheet" href="./assets/style.css">
-    <link rel="icon" href="./assets/images/favicon.png">
-    <link rel="apple-touch-icon" href="./assets/images/favicon.png">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="https://github.com/CodionCA/PuckGuide" target="_blank">
-                <svg class="icon" viewBox="0 0 32 32">
-                    <path d="M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.347 1.094-0.77 0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993 0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74 1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234 0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070 4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743 7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925 1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z"></path>
-                </svg>
-                Github
-            </a>
-        </nav>
-        
-        <h1>Puck Guide</h1>
-        <p>A quick guide to hosting your own Puck server</p>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Puck Guide</title>
+		<meta
+			name="description"
+			content="A simple guide to setting up Puck servers" />
 
-        <div class="navigation-buttons">
-            <a href="#simpleGuide">
-                <button>Simple</button>
-            </a>
-            <a href="#advancedGuide">
-                <button>Advanced</button>
-            </a>
-        </div>
-    </header>
+		<!-- Discord Embed -->
+		<meta property="og:title" content="Puck Guide" />
+		<meta
+			property="og:description"
+			content="Guide for setting up Puck servers - covers in-game setup, port forwarding, Linux servers, modding, troubleshooting, and common issues." />
+		<meta property="og:url" content="https://codionca.github.io/PuckGuide/" />
+		<meta
+			property="og:image"
+			content="https://codionca.github.io/PuckGuide/assets/images/favicon.png" />
+		<meta property="og:color" content="#fcbb0a" />
+		<meta name="theme-color" content="#fcbb0a" />
 
-    <main>
-        <section id="simpleGuide">
-            <h2>Getting Started - The Simple Way</h2>
-            
-            <p>There are TWO different ways of hosting your own Puck server, one is to simply open your game up normally and open the "SERVER BROWSER" menu and select "NEW SERVER" at the bottom</p>
+		<link rel="stylesheet" href="./assets/style.css" />
+		<link rel="icon" href="./assets/images/favicon.png" />
+		<link rel="apple-touch-icon" href="./assets/images/favicon.png" />
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="https://github.com/CodionCA/PuckGuide" target="_blank">
+					<svg class="icon" viewBox="0 0 32 32">
+						<path
+							d="M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.347 1.094-0.77 0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993 0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74 1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234 0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070 4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743 7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925 1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z"></path>
+					</svg>
+					Github
+				</a>
+			</nav>
 
-            <div class="image-container">
-                <img src="assets/images/serverbrowsermenu.png" alt="Server Browser">
-            </div>
-            <p>You will be presented with this screen</p>
-            <div class="image-container">
-                <img src="assets/images/newservermenu.png" alt="New Server Menu">
-            </div>
-            
-            <div class="server-options">
-                <ul>
-                    <li>
-                        <strong>Server Type:</strong> Choose between "Self Hosted" or "Dedicated"
-                        <ul>
-                            <li><em>Self Hosted means on your own system and network, Dedicated uses Pucks own servers however are limited in Tick rate and can feel quite <a href="#tickrate">sluggish</a></em></li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <strong>Name:</strong> Enter your server name (appears in server browser)
-                        <ul>
-                            <li><em>You can use <a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html">Unity Rich Text</a> for colours and sizes, be careful of the character limit & do not abuse this</em></li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <strong>Port:</strong> Set the port number (default is 30609)
-                        <ul>
-                            <li>This is the port you will either <a href="#portforwardGuide">forward</a> (in your modem/router panel) or you can enable <a href="#upnpGuide">UPNP</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <strong>Maximum Players:</strong> Use slider to set player limit
-                    </li>
-                    
-                    <li>
-                        <strong>Password Protected:</strong> Toggle to require password for joining
-                    </li>
-                    
-                    <li>
-                        <strong>Password:</strong> Enter password if protection is enabled
-                    </li>
-                    
-                    <li>
-                        <strong>VoIP:</strong> Toggle voice chat on/off (checkbox)
-                    </li>
-                </ul>
-            </div>
+			<h1>Puck Guide</h1>
+			<p>A quick guide to hosting your own Puck server</p>
 
-            <div class="help-button">
-                <a href="#portforwardGuide">
-                    <button>Not working?</button>
-                </a>
-            </div>
+			<div class="navigation-buttons">
+				<a href="#simpleGuide">
+					<button>Simple</button>
+				</a>
+				<a href="#advancedGuide">
+					<button>Advanced</button>
+				</a>
+			</div>
+		</header>
 
-            <hr>
+		<main>
+			<section id="simpleGuide">
+				<h2>Getting Started - The Simple Way</h2>
 
-            <div class="notice" id="tickrate">
-                <h4>⚠️ Important Considerations</h4>
-                <p><em>This method relies on good ping and framerate. Dedicated servers are limited to 100hz/100fps. Self-hosted servers need solid network and system specs for higher refresh rates.</em></p>
-                <p>The videos below show high vs low frame rates. In Puck, physics run server-side, so your mouse movements are limited by the server's tick rate, causing sluggish controls unless adjusted.</p>
-                <div class="video-container">
-                    <video autoplay loop muted playsinline>
-                        <source src="assets/images/24fpsexample.mp4" type="video/mp4">
-                    </video>
-                    <video autoplay loop muted playsinline>
-                        <source src="assets/images/280fpsexample.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div>
-        </section>
+				<p>
+					There are TWO different ways of hosting your own Puck server, one is
+					to simply open your game up normally and open the "SERVER BROWSER"
+					menu and select "NEW SERVER" at the bottom
+				</p>
 
-        <section id="portforwardGuide" class="globalguide">
-            <h2>Port Forwarding Setup</h2>
-            
-            <p>If players can't connect to your server, you need to open ports <strong>30609</strong> (UDP) on your router. So long as you are not behind a <a href="#cgnat">CGNAT</a>.</p>
+				<div class="image-container">
+					<img src="assets/images/serverbrowsermenu.png" alt="Server Browser" />
+				</div>
+				<p>You will be presented with this screen</p>
+				<div class="image-container">
+					<img src="assets/images/newservermenu.png" alt="New Server Menu" />
+				</div>
 
-            
-            <p><strong>Access your router's admin panel:</strong> Run <code>ipconfig</code> in Windows Terminal, copy the "Default Gateway" IP address (like 192.168.1.1), paste it into your browser's address bar, then log in using the credentials typically on your router's label.</p>
+				<div class="server-options">
+					<ul>
+						<li>
+							<strong>Server Type:</strong> Choose between "Self Hosted" or
+							"Dedicated"
+							<ul>
+								<li>
+									<em
+										>Self Hosted means on your own system and network, Dedicated
+										uses Pucks own servers however are limited in Tick rate and
+										can feel quite <a href="#tickrate">sluggish</a></em
+									>
+								</li>
+							</ul>
+						</li>
 
-            <p><strong>Port Forward Setup Example:</strong></p>
-            <ul>
-                <li>Protocol: <code>UDP</code></li>
-                <li>Internal Port: <code>30609</code></li>
-                <li>External Port: <code>30609</code></li>
-                <li>Internal IP: Your PC's local IP (find with <code>ipconfig</code> in Windows terminal)</li>
-            </ul>
-            
-            <h3>Port Forwarding Guides by Router Brand</h3>
-            <ul>
-                <li><a href="https://support.linksys.com/kb/article/318-en/" target="_blank">Linksys Router Port Forwarding Guide</a></li>
-                <li><a href="https://kb.netgear.com/000053857/Enable-Port-Forwarding" target="_blank">Netgear Router Port Forwarding Guide</a></li>
-                <li><a href="https://www.asus.com/support/faq/1037906/" target="_blank">ASUS Router Port Forwarding Guide</a></li>
-                <li><a href="https://www.tp-link.com/us/support/faq/1379/" target="_blank">TP-Link Router Port Forwarding Guide</a></li>
-                <li><a href="https://portforward.com/" target="_blank">Universal Port Forwarding Guide (All Brands)</a></li>
-            </ul>
-            
-            <h3 id="upnpGuide">Enabling UPnP</h3>
-            <p><strong>Alternative:</strong> You can enable UPnP instead of manual port forwarding. This is less reliable but automatically handles port forwarding for all applications. Look for a UPnP toggle in your router admin settings (usually at <code>192.168.1.1</code>).</p>
-            
-            <div class="notice">
-                <h5>Security Warning</h5>
-                <p>Enabling UPnP can resolve connection issues rather than simply port forwarding, however, this can create security vulnerabilities. A lot of routers have UPnP disabled by default for a reason.</p>
-                <div class="readmoresec">
-                    <a href="https://nordvpn.com/blog/what-is-upnp/" target="_blank">
-                        <button>Read More</button>
-                    </a>
-                </div>
-            </div>
-            
-            <h3>Still Can't Connect?</h3>
-            
-            <div class="troubleshooting-step">
-                <h4>Check Your PC Firewall</h4>
-                <p>Your PC's firewall might be blocking the connection even when your router is configured correctly. Make sure Windows Firewall and any other security software are allowing port 30609 (previously on build 202 7777 and/or 7778) through.</p>
-            </div>
-            
-            <div class="troubleshooting-step" id="cgnat">
-                <h4>CGNAT / Double-NAT Issues</h4>
-                <p>If your network is behind a "double-NAT" or CGNAT (Carrier-Grade NAT), port forwarding won't work properly.</p>
-                <p><strong>How to check:</strong> Compare your router's WAN IP address with your public IP from <a href="https://ifconfig.io/" target="_blank">ifconfig.io</a>. If they don't match, you're behind CGNAT.</p>
-                <p><strong>Solution:</strong> Use a paid VPS provider instead (see guides below).</p>
-            </div>
-            
-            <div class="image-container">
-                <img src="assets/images/cgnatexample.png" alt="CGNAT network diagram showing double-NAT configuration">
-            </div>
-        </section>
+						<li>
+							<strong>Name:</strong> Enter your server name (appears in server
+							browser)
+							<ul>
+								<li>
+									<em
+										>You can use
+										<a
+											href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html"
+											>Unity Rich Text</a
+										>
+										for colours and sizes, be careful of the character limit &
+										do not abuse this</em
+									>
+								</li>
+							</ul>
+						</li>
 
-        <section id="advancedGuide">
-            <h2>The Advanced Way</h2>
-            <p>Want something more permanent, stable, dedicated and more performant?</p>
-            
-            <h3>VPS vs Home Server</h3>
-            
-            <p><strong>VPS:</strong> Professional hosting, better uptime, monthly cost. Best for 24/7 public servers (CDL, Toasters Rinks & PHL).</p>
-            <p><strong>Home Server:</strong> No ongoing costs, full control, uses your bandwidth/electricity. Best for friends & family servers.</p>
+						<li>
+							<strong>Port:</strong> Set the port number (default is 30609)
+							<ul>
+								<li>
+									This is the port you will either
+									<a href="#portforwardGuide">forward</a> (in your modem/router
+									panel) or you can enable <a href="#upnpGuide">UPNP</a>
+								</li>
+							</ul>
+						</li>
 
-            <h4>VPS Providers</h4>
-            <ul>
-                <li><a href="https://www.vultr.com/?ref=9765895" target="_blank">Vultr</a></li>
-                <p>Vultr is a good provider, they have a lot of locations and are very cheap. Easy to setup and use.</p>
-                <li><a href="https://www.ovhcloud.com/en/vps/" target="_blank">OVH</a></li>
-                <p>OVH is a french provider, they also have a lot of locations and are also very cheap.</p>              
-            </ul>
-            
-            <h3>Operating System</h3>
-            
-            <p><strong>Debian (Recommended)</strong> - Stable, beginner-friendly, minimal resources.<br>
-            <strong>Ubuntu Server</strong> - User-friendly, great community support.<br>
-            <strong>Fedora Server</strong> - Modern features, cutting-edge packages.<br>
-            <strong>Docker Container</strong> - Easiest deployment (Not available yet).<br>
-            <strong>Windows Server</strong> - Familiar interface but resource-heavy. <em>Not recommended.</em></p>
-            
-            <h2>Server Setup & Configuration</h2>
-            <div class="notice-blue">
-                <div style="
-    display: inline-flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    color: #e9ecef;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    margin-top: 16px;
-">
-    <svg style="
-        width: 16px;
-        height: 16px;
-        margin-right: 8px;
-        fill: currentColor;
-        opacity: 0.8;
-    " viewBox="0 0 24 24">
-        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
-    </svg>
-    This guide was last updated for Build B323
-</div>
-                <h4>Prerequisites</h4>
-                <ul>
-                        <li>A Debian-based (Debian 13 Trixie) server with SSH access</li>
-                            <small style="color: #6c757d;">(Debian 12 Bookworm uses the same/similar steps)</small>
-                        <li>Root access and preferably a dedicated sudo user</li>
-                        <li>At least 2GB of memory (each Puck server uses ~300MB)</li>
-                        <li>Basic command line knowledge</li>
-                        
-                </ul>
-                <p>These commands are executed as root user</p>
-                <p>If you are not comfortable with the command line, please use the simple guide above.</p>
-                <p>You can use sudo to run commands as root, but for the sake of simplicity, we will be using <code>su -l</code> for the entire guide.</p>
-                <p>A dedicated puckd user will be created below for the server <a href="https://en.wikipedia.org/wiki/Daemon_(computing)" target="_blank">daemon</a></p>
-            </div>
-            
-            <h3>Step 1: Update Your System</h3>
-            <pre><code>apt update && apt upgrade -y</code></pre>
-            
-            <h3>Step 2: Install Prerequisites & SteamCMD</h3>
-            <p>Install necessary tools and prepare SteamCMD:</p>
-            <blockquote>
-                <strong>On debian you need to add the non-free repo, but on distros like Ubuntu you may not</strong>
-            </blockquote>
-            <pre><code>apt install software-properties-common
-echo "deb http://deb.debian.org/debian bookworm main contrib non-free" > /etc/apt/sources.list.d/nonfree.list
+						<li>
+							<strong>Maximum Players:</strong> Use slider to set player limit
+						</li>
+
+						<li>
+							<strong>Password Protected:</strong> Toggle to require password
+							for joining
+						</li>
+
+						<li>
+							<strong>Password:</strong> Enter password if protection is enabled
+						</li>
+
+						<li><strong>VoIP:</strong> Toggle voice chat on/off (checkbox)</li>
+					</ul>
+				</div>
+
+				<div class="help-button">
+					<a href="#portforwardGuide">
+						<button>Not working?</button>
+					</a>
+				</div>
+
+				<hr />
+
+				<div class="notice" id="tickrate">
+					<h4>⚠️ Important Considerations</h4>
+					<p>
+						<em
+							>This method relies on good ping and framerate. Dedicated servers
+							are limited to 100hz/100fps. Self-hosted servers need solid
+							network and system specs for higher refresh rates.</em
+						>
+					</p>
+					<p>
+						The videos below show high vs low frame rates. In Puck, physics run
+						server-side, so your mouse movements are limited by the server's
+						tick rate, causing sluggish controls unless adjusted.
+					</p>
+					<div class="video-container">
+						<video autoplay loop muted playsinline>
+							<source src="assets/images/24fpsexample.mp4" type="video/mp4" />
+						</video>
+						<video autoplay loop muted playsinline>
+							<source src="assets/images/280fpsexample.mp4" type="video/mp4" />
+						</video>
+					</div>
+				</div>
+			</section>
+
+			<section id="portforwardGuide" class="globalguide">
+				<h2>Port Forwarding Setup</h2>
+
+				<p>
+					If players can't connect to your server, you need to open ports
+					<strong>30609</strong> (UDP) on your router. So long as you are not
+					behind a <a href="#cgnat">CGNAT</a>.
+				</p>
+
+				<p>
+					<strong>Access your router's admin panel:</strong> Run
+					<code>ipconfig</code> in Windows Terminal, copy the "Default Gateway"
+					IP address (like 192.168.1.1), paste it into your browser's address
+					bar, then log in using the credentials typically on your router's
+					label.
+				</p>
+
+				<p><strong>Port Forward Setup Example:</strong></p>
+				<ul>
+					<li>Protocol: <code>UDP</code></li>
+					<li>Internal Port: <code>30609</code></li>
+					<li>External Port: <code>30609</code></li>
+					<li>
+						Internal IP: Your PC's local IP (find with <code>ipconfig</code> in
+						Windows terminal)
+					</li>
+				</ul>
+
+				<h3>Port Forwarding Guides by Router Brand</h3>
+				<ul>
+					<li>
+						<a
+							href="https://support.linksys.com/kb/article/318-en/"
+							target="_blank"
+							>Linksys Router Port Forwarding Guide</a
+						>
+					</li>
+					<li>
+						<a
+							href="https://kb.netgear.com/000053857/Enable-Port-Forwarding"
+							target="_blank"
+							>Netgear Router Port Forwarding Guide</a
+						>
+					</li>
+					<li>
+						<a href="https://www.asus.com/support/faq/1037906/" target="_blank"
+							>ASUS Router Port Forwarding Guide</a
+						>
+					</li>
+					<li>
+						<a
+							href="https://www.tp-link.com/us/support/faq/1379/"
+							target="_blank"
+							>TP-Link Router Port Forwarding Guide</a
+						>
+					</li>
+					<li>
+						<a href="https://portforward.com/" target="_blank"
+							>Universal Port Forwarding Guide (All Brands)</a
+						>
+					</li>
+				</ul>
+
+				<h3 id="upnpGuide">Enabling UPnP</h3>
+				<p>
+					<strong>Alternative:</strong> You can enable UPnP instead of manual
+					port forwarding. This is less reliable but automatically handles port
+					forwarding for all applications. Look for a UPnP toggle in your router
+					admin settings (usually at <code>192.168.1.1</code>).
+				</p>
+
+				<div class="notice">
+					<h5>Security Warning</h5>
+					<p>
+						Enabling UPnP can resolve connection issues rather than simply port
+						forwarding, however, this can create security vulnerabilities. A lot
+						of routers have UPnP disabled by default for a reason.
+					</p>
+					<div class="readmoresec">
+						<a href="https://nordvpn.com/blog/what-is-upnp/" target="_blank">
+							<button>Read More</button>
+						</a>
+					</div>
+				</div>
+
+				<h3>Still Can't Connect?</h3>
+
+				<div class="troubleshooting-step">
+					<h4>Check Your PC Firewall</h4>
+					<p>
+						Your PC's firewall might be blocking the connection even when your
+						router is configured correctly. Make sure Windows Firewall and any
+						other security software are allowing port 30609 (previously on build
+						202 7777 and/or 7778) through.
+					</p>
+				</div>
+
+				<div class="troubleshooting-step" id="cgnat">
+					<h4>CGNAT / Double-NAT Issues</h4>
+					<p>
+						If your network is behind a "double-NAT" or CGNAT (Carrier-Grade
+						NAT), port forwarding won't work properly.
+					</p>
+					<p>
+						<strong>How to check:</strong> Compare your router's WAN IP address
+						with your public IP from
+						<a href="https://ifconfig.io/" target="_blank">ifconfig.io</a>. If
+						they don't match, you're behind CGNAT.
+					</p>
+					<p>
+						<strong>Solution:</strong> Use a paid VPS provider instead (see
+						guides below).
+					</p>
+				</div>
+
+				<div class="image-container">
+					<img
+						src="assets/images/cgnatexample.png"
+						alt="CGNAT network diagram showing double-NAT configuration" />
+				</div>
+			</section>
+
+			<section id="advancedGuide">
+				<h2>The Advanced Way</h2>
+				<p>
+					Want something more permanent, stable, dedicated and more performant?
+				</p>
+
+				<h3>VPS vs Home Server</h3>
+
+				<p>
+					<strong>VPS:</strong> Professional hosting, better uptime, monthly
+					cost. Best for 24/7 public servers (CDL, Toasters Rinks & PHL).
+				</p>
+				<p>
+					<strong>Home Server:</strong> No ongoing costs, full control, uses
+					your bandwidth/electricity. Best for friends & family servers.
+				</p>
+
+				<h4>VPS Providers</h4>
+				<ul>
+					<li>
+						<a href="https://www.vultr.com/?ref=9765895" target="_blank"
+							>Vultr</a
+						>
+					</li>
+					<p>
+						Vultr is a good provider, they have a lot of locations and are very
+						cheap. Easy to setup and use.
+					</p>
+					<li>
+						<a href="https://www.ovhcloud.com/en/vps/" target="_blank">OVH</a>
+					</li>
+					<p>
+						OVH is a french provider, they also have a lot of locations and are
+						also very cheap.
+					</p>
+				</ul>
+
+				<h3>Operating System</h3>
+
+				<p>
+					<strong>Debian (Recommended)</strong> - Stable, beginner-friendly,
+					minimal resources.<br />
+					<strong>Ubuntu Server</strong> - User-friendly, great community
+					support.<br />
+					<strong>Fedora Server</strong> - Modern features, cutting-edge
+					packages.<br />
+					<strong>Docker Container</strong> - Easiest deployment (Not available
+					yet).<br />
+					<strong>Windows Server</strong> - Familiar interface but
+					resource-heavy. <em>Not recommended.</em>
+				</p>
+
+				<h2>Server Setup & Configuration</h2>
+				<div class="notice-blue">
+					<div
+						style="
+							display: inline-flex;
+							align-items: center;
+							background: rgba(255, 255, 255, 0.1);
+							color: #e9ecef;
+							padding: 8px 12px;
+							border-radius: 6px;
+							font-size: 14px;
+							font-weight: 500;
+							border: 1px solid rgba(255, 255, 255, 0.15);
+							margin-top: 16px;
+						">
+						<svg
+							style="
+								width: 16px;
+								height: 16px;
+								margin-right: 8px;
+								fill: currentColor;
+								opacity: 0.8;
+							"
+							viewBox="0 0 24 24">
+							<path
+								d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" />
+						</svg>
+						This guide was last updated for Build B323
+					</div>
+					<h4>Prerequisites</h4>
+					<ul>
+						<li>A Debian-based (Debian 13 Trixie) server with SSH access</li>
+						<small style="color: #6c757d"
+							>(Debian 12 Bookworm uses the same/similar steps)</small
+						>
+						<li>Root access and preferably a dedicated sudo user</li>
+						<li>At least 2GB of memory (each Puck server uses ~300MB)</li>
+						<li>Basic command line knowledge</li>
+					</ul>
+					<p>These commands are executed as root user</p>
+					<p>
+						If you are not comfortable with the command line, please use the
+						simple guide above.
+					</p>
+					<p>
+						You can use sudo to run commands as root, but for the sake of
+						simplicity, we will be using <code>su -l</code> for the entire
+						guide.
+					</p>
+					<p>
+						A dedicated puckd user will be created below for the server
+						<a
+							href="https://en.wikipedia.org/wiki/Daemon_(computing)"
+							target="_blank"
+							>daemon</a
+						>
+					</p>
+				</div>
+
+				<h3>Step 1: Update Your System</h3>
+				<pre><code>apt update && apt upgrade -y</code></pre>
+
+				<h3>Step 2: Install Prerequisites & SteamCMD</h3>
+				<p>Install necessary tools and prepare SteamCMD:</p>
+				<blockquote>
+					<strong
+						>On debian you need to add the non-free repo, but on distros like
+						Ubuntu you may not</strong
+					>
+				</blockquote>
+				<pre><code>apt install software-properties-common
+echo "deb http://deb.debian.org/debian bookworm main contrib non-free" &gt; /etc/apt/sources.list.d/nonfree.list
 dpkg --add-architecture i386
 apt update
 apt install steamcmd</code></pre>
-            
-            <h3>Step 3: Create Server Download Directory</h3>
-            <pre><code>mkdir -p /srv/puck-download</code></pre>
-            
-            <h3>Step 4: Download Puck Server Files</h3>
-            <p>Use SteamCMD to download the server files:</p>
-            <pre><code>/usr/games/steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit</code></pre>
-            <p><strong>Note:</strong> 3481440 is the Steam App ID for Puck's dedicated server. You can verify it on <a href="https://steamdb.info/app/3481440/" target="_blank">SteamDB</a>.</p>
-            
-            <h3>Step 5: Create System User for Running Server</h3>
-            <p>Create a dedicated system user for running the server:</p>
-            <pre><code>adduser --system --no-create-home --group puckd</code></pre>
-            
-            <h3>Step 6: Set Up the First Server Instance</h3>
-            <p>Create the server directory and assign permissions:</p>
-            <pre><code>mkdir -p /srv/puck/server1
+
+				<h3>Step 3: Create Server Download Directory</h3>
+				<pre><code>mkdir -p /srv/puck-download</code></pre>
+
+				<h3>Step 4: Download Puck Server Files</h3>
+				<p>Use SteamCMD to download the server files:</p>
+				<pre><code>/usr/games/steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit</code></pre>
+				<p>
+					<strong>Note:</strong> 3481440 is the Steam App ID for Puck's
+					dedicated server. You can verify it on
+					<a href="https://steamdb.info/app/3481440/" target="_blank">SteamDB</a
+					>.
+				</p>
+
+				<h3>Step 5: Create System User for Running Server</h3>
+				<p>Create a dedicated system user for running the server:</p>
+				<pre><code>adduser --system --no-create-home --group puckd</code></pre>
+
+				<h3>Step 6: Set Up the First Server Instance</h3>
+				<p>Create the server directory and assign permissions:</p>
+				<pre><code>mkdir -p /srv/puck/server1
 cp -r /srv/puck-download/* /srv/puck/server1/
 chown -R puckd:puckd /srv/puck/server1
 chmod +x /srv/puck/server1/start_server.sh
 chmod +x /srv/puck/server1/Puck</code></pre>
-            
-            <h3>Step 7: Create Server Configuration</h3>
-            <pre><code>nano /srv/puck/server1/server_config.json</code></pre>
-            <p>Paste and modify as needed:</p>
-            <pre class="language-json"><code>{
+
+				<h3>Step 7: Create Server Configuration</h3>
+				<pre><code>nano /srv/puck/server1/server_config.json</code></pre>
+				<p>Paste and modify as needed:</p>
+				<pre class="language-json"><code>{
   "port": 30609,
   "name": "MY PUCK SERVER - GUIDE",
   "maxPlayers": 12,
@@ -294,39 +455,58 @@ chmod +x /srv/puck/server1/Puck</code></pre>
   "level": "default"
 }
 </code></pre>
-<div class="notice-blue">
-  <h4>Important Settings</h4>
-  <ul>
-    <li>
-      <strong>Name:</strong> Enter your server name (appears in server browser)
-      <ul>
-        <li><em>You can use <a href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html" target="_blank">Unity Rich Text</a> for colors and sizes. Be careful of the character limit and do not abuse this feature.</em></li>
-      </ul>
-    </li>
-    <li>
-      <strong>Port:</strong> Set the port number (default is 30609)
-      <ul>
-        <li>This is the port you will either <a href="#portforwardGuide">forward</a> (in your modem/router panel) or you can enable <a href="#upnpGuide">UPnP</a>.</li>
-      </ul>
-    </li>
-    <li>
-      <strong>tickRate:</strong> The actual FPS the server will attempt to run at.
-    </li>
-    <li>
-    <strong>Mods:</strong> The example configuration has no mods, feel free to browse the workshop and add one like "Gafurix' Custom Motd" in the mods section:
-    <pre><code>{
+				<div class="notice-blue">
+					<h4>Important Settings</h4>
+					<ul>
+						<li>
+							<strong>Name:</strong> Enter your server name (appears in server
+							browser)
+							<ul>
+								<li>
+									<em
+										>You can use
+										<a
+											href="https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html"
+											target="_blank"
+											>Unity Rich Text</a
+										>
+										for colors and sizes. Be careful of the character limit and
+										do not abuse this feature.</em
+									>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Port:</strong> Set the port number (default is 30609)
+							<ul>
+								<li>
+									This is the port you will either
+									<a href="#portforwardGuide">forward</a> (in your modem/router
+									panel) or you can enable <a href="#upnpGuide">UPnP</a>.
+								</li>
+							</ul>
+						</li>
+						<li>
+							<strong>tickRate:</strong> The actual FPS the server will attempt
+							to run at.
+						</li>
+						<li>
+							<strong>Mods:</strong> The example configuration has no mods, feel
+							free to browse the workshop and add one like "Gafurix' Custom
+							Motd" in the mods section:
+							<pre><code>{
 "id": "3721801263",
 "isEnabled": true,
 "isClientRequired": false
 }</code></pre>
-    </li>
-  </ul>
-</div>
-            
-            <h3>Step 8: Create systemd Unit</h3>
-            <pre><code>nano /etc/systemd/system/puck@.service</code></pre>
-            <p>Paste:</p>
-            <pre class="language-ini"><code>[Unit]
+						</li>
+					</ul>
+				</div>
+
+				<h3>Step 8: Create systemd Unit</h3>
+				<pre><code>nano /etc/systemd/system/puck@.service</code></pre>
+				<p>Paste:</p>
+				<pre class="language-ini"><code>[Unit]
 Description=Puck Dedicated Server - %i
 After=network.target
 
@@ -338,89 +518,103 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target</code></pre>
-            
-            <h3>Step 9: Enable and Start the Server</h3>
-            <pre><code>systemctl daemon-reload
+
+				<h3>Step 9: Enable and Start the Server</h3>
+				<pre><code>systemctl daemon-reload
 systemctl enable puck@server1
 systemctl start puck@server1</code></pre>
-            <p>Check status:</p>
-            <pre><code>systemctl status puck@server1
+				<p>Check status:</p>
+				<pre><code>systemctl status puck@server1
 journalctl -u puck@server1 -f</code></pre>
-            
-            <h3>Step 10: Open Firewall Ports</h3>
-            <p>By default, Debian has no firewall configured, meaning all ports are open. On a VPS, this is a security risk.</p>
-            
-            <blockquote>
-                <strong>Install <code>ufw</code> and open required UDP port</strong>
-            </blockquote>
-            <pre><code>apt install ufw
+
+				<h3>Step 10: Open Firewall Ports</h3>
+				<p>
+					By default, Debian has no firewall configured, meaning all ports are
+					open. On a VPS, this is a security risk.
+				</p>
+
+				<blockquote>
+					<strong>Install <code>ufw</code> and open required UDP port</strong>
+				</blockquote>
+				<pre><code>apt install ufw
 ufw enable
 ufw allow 30609/udp
 </code></pre>
-            <p>Adjust port number based on your configuration.</p>
+				<p>Adjust port number based on your configuration.</p>
 
-<hr>
-            
-<h2>Managing Multiple Servers</h2>
-            
-            <h3>Step 1: Duplicate Server Files</h3>
-            <p>Copy the existing server instance to create a new one:</p>
-            <pre><code>cp -r /srv/puck/server1 /srv/puck/server2</code></pre>
-            
-            <h3>Step 2: Configure New Server Ports</h3>
-            <p>Edit the configuration file and change the port numbers:</p>
-            <blockquote>
-                <strong>Change ports to one above, example 30610 and open it</strong>
-            </blockquote>
-            <pre><code>nano /srv/puck/server2/server_config.json 
+				<hr />
+
+				<h2>Managing Multiple Servers</h2>
+
+				<h3>Step 1: Duplicate Server Files</h3>
+				<p>Copy the existing server instance to create a new one:</p>
+				<pre><code>cp -r /srv/puck/server1 /srv/puck/server2</code></pre>
+
+				<h3>Step 2: Configure New Server Ports</h3>
+				<p>Edit the configuration file and change the port numbers:</p>
+				<blockquote>
+					<strong>Change ports to one above, example 30610 and open it</strong>
+				</blockquote>
+				<pre><code>nano /srv/puck/server2/server_config.json 
 ufw allow 30610/udp</code></pre>
-            
-            
-            <h3>Step 3: Set File Permissions</h3>
-            <blockquote>
-                <strong>Mods & Logging will break if you skip this step</strong>
-            </blockquote>
-            <p>Give ownership of the new files to the puckd user:</p>
-            <pre><code>chown -R puckd:puckd /srv/puck/server2</code></pre>
-            
-            <h3>Step 4: Enable Auto-Start</h3>
-            <p>Enable the new server to start automatically on boot:</p>
-            <pre><code>systemctl enable puck@server2</code></pre>
-            
-            <h3>Step 5: Start and Monitor</h3>
-            <p>Start the server:</p>
-            <pre><code>systemctl start puck@server2</code></pre>
-            
-            <p>Check if it's working with logs:</p>
-            <pre><code>journalctl -u puck@server2 -f</code></pre>
 
-            <div class="notice-blue">
-                <h4>Additional configuration</h4>
-                <p>In the latest build you can configure many things including the gamemode itself within the servers directory, here are some examples copied from the developer himself:</p>
+				<h3>Step 3: Set File Permissions</h3>
+				<blockquote>
+					<strong>Mods & Logging will break if you skip this step</strong>
+				</blockquote>
+				<p>Give ownership of the new files to the puckd user:</p>
+				<pre><code>chown -R puckd:puckd /srv/puck/server2</code></pre>
 
-                <h5>Public</h5>
-                <ul>
-                    <li><code>phaseDurationMap</code> — Duration in seconds for each game phase <em>(defaults below)</em>
-                    <ul>
-                        <li><code>None</code> — 0s</li>
-                        <li><code>Warmup</code> — 60s</li>
-                        <li><code>PreGame</code> — 10s</li>
-                        <li><code>FaceOff</code> — 5s</li>
-                        <li><code>Play</code> — 300s</li>
-                        <li><code>BlueScore</code> — 5s</li>
-                        <li><code>RedScore</code> — 5s</li>
-                        <li><code>Replay</code> — 10s</li>
-                        <li><code>Intermission</code> — 10s</li>
-                        <li><code>GameOver</code> — 30s</li>
-                        <li><code>PostGame</code> — 10s</li>
-                    </ul>
-                    </li>
-                    <li><code>spawnDelay</code> — Seconds to wait before spawning players at the start of a phase <em>(default: 5)</em></li>
-                    <li><code>maxPeriods</code> — Number of periods per game <em>(default: 3)</em></li>
-                </ul>
+				<h3>Step 4: Enable Auto-Start</h3>
+				<p>Enable the new server to start automatically on boot:</p>
+				<pre><code>systemctl enable puck@server2</code></pre>
 
-                <p>Sample Public game mode config:</p>
-                <pre class="language-json"><code>{
+				<h3>Step 5: Start and Monitor</h3>
+				<p>Start the server:</p>
+				<pre><code>systemctl start puck@server2</code></pre>
+
+				<p>Check if it's working with logs:</p>
+				<pre><code>journalctl -u puck@server2 -f</code></pre>
+
+				<div class="notice-blue">
+					<h4>Additional configuration</h4>
+					<p>
+						In the latest build you can configure many things including the
+						gamemode itself within the servers directory, here are some examples
+						copied from the developer himself:
+					</p>
+
+					<h5>Public</h5>
+					<ul>
+						<li>
+							<code>phaseDurationMap</code> — Duration in seconds for each game
+							phase <em>(defaults below)</em>
+							<ul>
+								<li><code>None</code> — 0s</li>
+								<li><code>Warmup</code> — 60s</li>
+								<li><code>PreGame</code> — 10s</li>
+								<li><code>FaceOff</code> — 5s</li>
+								<li><code>Play</code> — 300s</li>
+								<li><code>BlueScore</code> — 5s</li>
+								<li><code>RedScore</code> — 5s</li>
+								<li><code>Replay</code> — 10s</li>
+								<li><code>Intermission</code> — 10s</li>
+								<li><code>GameOver</code> — 30s</li>
+								<li><code>PostGame</code> — 10s</li>
+							</ul>
+						</li>
+						<li>
+							<code>spawnDelay</code> — Seconds to wait before spawning players
+							at the start of a phase <em>(default: 5)</em>
+						</li>
+						<li>
+							<code>maxPeriods</code> — Number of periods per game
+							<em>(default: 3)</em>
+						</li>
+					</ul>
+
+					<p>Sample Public game mode config:</p>
+					<pre class="language-json"><code>{
 "phaseDurationMap": {
     "None": 0,
     "Warmup": 60,
@@ -438,14 +632,18 @@ ufw allow 30610/udp</code></pre>
 "maxPeriods": 3
 }</code></pre>
 
-                <h5>Competitive</h5>
-                <ul>
-                    <li>All fields from Public config</li>
-                    <li><code>teamAssignments</code> — Maps each team to an array of Steam IDs pre-assigned to it; players not listed are put into spectator <em>(default: {})</em></li>
-                </ul>
+					<h5>Competitive</h5>
+					<ul>
+						<li>All fields from Public config</li>
+						<li>
+							<code>teamAssignments</code> — Maps each team to an array of Steam
+							IDs pre-assigned to it; players not listed are put into spectator
+							<em>(default: {})</em>
+						</li>
+					</ul>
 
-                <p>Sample Competitive game mode config:</p>
-                <pre class="language-json"><code>{
+					<p>Sample Competitive game mode config:</p>
+					<pre class="language-json"><code>{
 "teamAssignments": {
     "Blue": [
     "76561198000000000",
@@ -474,61 +672,111 @@ ufw allow 30610/udp</code></pre>
 "spawnDelay": 5,
 "maxPeriods": 3
 }</code></pre>
-<h4>Puck Dedicated Server CLI Arguments</h4>
+					<h4>Puck Dedicated Server CLI Arguments</h4>
 
-  <h5>Server File Paths</h5>
-  <ul>
-    <li><code>--logPath</code> — Path to the log output file <em>(default: ./Logs/Puck.log)</em></li>
-    <li><code>--adminSteamIdsPath</code> — Path to the admin Steam IDs JSON file <em>(default: ./admin_steam_ids.json)</em></li>
-    <li><code>--bannedSteamIdsPath</code> — Path to the banned Steam IDs JSON file <em>(default: ./banned_steam_ids.json)</em></li>
-    <li><code>--bannedIpAddressesPath</code> — Path to the banned IP addresses JSON file <em>(default: ./banned_ip_addresses.json)</em></li>
-    <li><code>--whitelistedSteamIdsPath</code> — Path to the server whitelist JSON file <em>(default: ./whitelisted_steam_ids.json)</em></li>
-    <li><code>--serverConfigPath</code> — Path to the server config JSON file <em>(default: ./server_config.json)</em></li>
-    <li><code>--publicGameModeConfigPath</code> — Path to the public game mode config JSON file <em>(default: ./public_game_mode_config.json)</em></li>
-    <li><code>--competitiveGameModeConfigPath</code> — Path to the competitive game mode config JSON file <em>(default: ./competitive_game_mode_config.json)</em></li>
-  </ul>
+					<h5>Server File Paths</h5>
+					<ul>
+						<li>
+							<code>--logPath</code> — Path to the log output file
+							<em>(default: ./Logs/Puck.log)</em>
+						</li>
+						<li>
+							<code>--adminSteamIdsPath</code> — Path to the admin Steam IDs
+							JSON file <em>(default: ./admin_steam_ids.json)</em>
+						</li>
+						<li>
+							<code>--bannedSteamIdsPath</code> — Path to the banned Steam IDs
+							JSON file <em>(default: ./banned_steam_ids.json)</em>
+						</li>
+						<li>
+							<code>--bannedIpAddressesPath</code> — Path to the banned IP
+							addresses JSON file <em>(default: ./banned_ip_addresses.json)</em>
+						</li>
+						<li>
+							<code>--whitelistedSteamIdsPath</code> — Path to the server
+							whitelist JSON file
+							<em>(default: ./whitelisted_steam_ids.json)</em>
+						</li>
+						<li>
+							<code>--serverConfigPath</code> — Path to the server config JSON
+							file <em>(default: ./server_config.json)</em>
+						</li>
+						<li>
+							<code>--publicGameModeConfigPath</code> — Path to the public game
+							mode config JSON file
+							<em>(default: ./public_game_mode_config.json)</em>
+						</li>
+						<li>
+							<code>--competitiveGameModeConfigPath</code> — Path to the
+							competitive game mode config JSON file
+							<em>(default: ./competitive_game_mode_config.json)</em>
+						</li>
+					</ul>
 
-  <h5>Server Inline Config</h5>
-  <ul>
-    <li><code>--serverConfig</code> — Inline serialized server config JSON, used instead of loading from a file</li>
-    <li><code>--publicGameModeConfig</code> — Inline serialized public game mode config JSON, used instead of loading from a file</li>
-    <li><code>--competitiveGameModeConfig</code> — Inline serialized competitive game mode config JSON, used instead of loading from a file</li>
-  </ul>
+					<h5>Server Inline Config</h5>
+					<ul>
+						<li>
+							<code>--serverConfig</code> — Inline serialized server config
+							JSON, used instead of loading from a file
+						</li>
+						<li>
+							<code>--publicGameModeConfig</code> — Inline serialized public
+							game mode config JSON, used instead of loading from a file
+						</li>
+						<li>
+							<code>--competitiveGameModeConfig</code> — Inline serialized
+							competitive game mode config JSON, used instead of loading from a
+							file
+						</li>
+					</ul>
+				</div>
 
-            </div>
-            
-            <h2>Server Management Commands</h2>
-            <ul>
-                <li>View logs: <code>journalctl -u puck@server1 -f</code></li>
-                <li>Restart: <code>systemctl restart puck@server1</code></li>
-                <li>Stop: <code>systemctl stop puck@server1</code></li>
-                <li>Update: Stop server, re-run SteamCMD in <code>/srv/puck-download</code>, copy over updated files.</li>
-            </ul>
-            
-            <h2>Troubleshooting</h2>
-            <p><strong>Service won't start</strong><br>
-            Check logs with <code>journalctl -u puck@server1</code></p>
-            
-            <p><strong>Can't connect</strong><br>
-            Double-check firewall and public IP on VPS</p>
+				<h2>Server Management Commands</h2>
+				<ul>
+					<li>View logs: <code>journalctl -u puck@server1 -f</code></li>
+					<li>Restart: <code>systemctl restart puck@server1</code></li>
+					<li>Stop: <code>systemctl stop puck@server1</code></li>
+					<li>
+						Update: Stop server, re-run SteamCMD in
+						<code>/srv/puck-download</code>, copy over updated files.
+					</li>
+				</ul>
 
-            <p>Your Puck server should now be live and ready for players.</p>
+				<h2>Troubleshooting</h2>
+				<p>
+					<strong>Service won't start</strong><br />
+					Check logs with <code>journalctl -u puck@server1</code>
+				</p>
 
-        </section>
-    </main>
+				<p>
+					<strong>Can't connect</strong><br />
+					Double-check firewall and public IP on VPS
+				</p>
 
-    <footer>
-        <p>Quickly put together by #15 Codion</p>
-        <small>2026</small>
-    </footer>
-</body>
-<script>
-    $('a[href^="#"]').click(function(e) {
-      e.preventDefault();
-      $(window).stop(true).scrollTo(this.hash, {duration:500, interrupt:false});
-    });
-    </script>
-     
-   <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-commonmark.js"></script>   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
-      <script>anchors.add();</script>
+				<p>Your Puck server should now be live and ready for players.</p>
+			</section>
+		</main>
+
+		<footer>
+			<p>Quickly put together by #15 Codion</p>
+			<small>2026</small>
+		</footer>
+	</body>
+	<script>
+		$('a[href^="#"]').click(function (e) {
+			e.preventDefault();
+			$(window)
+				.stop(true)
+				.scrollTo(this.hash, { duration: 500, interrupt: false });
+		});
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-commonmark.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"
+		integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg="
+		crossorigin="anonymous"></script>
+	<script>
+		anchors.add();
+	</script>
+</html>
