@@ -540,7 +540,8 @@ journalctl -u puck@server1 -f</code></pre>
 				</blockquote>
 				<pre><code>apt install ufw
 ufw enable
-ufw allow 30609
+ufw allow 30609/tcp
+ufw allow 30609/udp
 </code></pre>
 				<p>Adjust port number based on your configuration.</p>
 
