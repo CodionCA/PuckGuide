@@ -74,7 +74,7 @@
                     </li>
                     
                     <li>
-                        <strong>Port:</strong> Set the port number (default is 7777)
+                        <strong>Port:</strong> Set the port number (default is 30609)
                         <ul>
                             <li>This is the port you will either <a href="#portforwardGuide">forward</a> (in your modem/router panel) or you can enable <a href="#upnpGuide">UPNP</a></li>
                         </ul>
@@ -124,7 +124,7 @@
         <section id="portforwardGuide" class="globalguide">
             <h2>Port Forwarding Setup</h2>
             
-            <p>If players can't connect to your server, you need to open ports <strong>7777</strong> and <strong>7778</strong> (UDP) on your router. So long as you are not behind a <a href="#cgnat">CGNAT</a>.</p>
+            <p>If players can't connect to your server, you need to open ports <strong>30609</strong> (UDP) on your router. So long as you are not behind a <a href="#cgnat">CGNAT</a>.</p>
 
             
             <p><strong>Access your router's admin panel:</strong> Run <code>ipconfig</code> in Windows Terminal, copy the "Default Gateway" IP address (like 192.168.1.1), paste it into your browser's address bar, then log in using the credentials typically on your router's label.</p>
@@ -132,8 +132,8 @@
             <p><strong>Port Forward Setup Example:</strong></p>
             <ul>
                 <li>Protocol: <code>UDP</code></li>
-                <li>External Port: <code>7777</code> and <code>7778</code></li>
-                <li>Internal Port: <code>7777</code> and <code>7778</code></li>
+                <li>Internal Port: <code>30609</code></li>
+                <li>External Port: <code>30609</code></li>
                 <li>Internal IP: Your PC's local IP (find with <code>ipconfig</code> in Windows terminal)</li>
             </ul>
             
@@ -163,7 +163,7 @@
             
             <div class="troubleshooting-step">
                 <h4>Check Your PC Firewall</h4>
-                <p>Your PC's firewall might be blocking the connection even when your router is configured correctly. Make sure Windows Firewall and any other security software are allowing ports 7777 and 7778 through.</p>
+                <p>Your PC's firewall might be blocking the connection even when your router is configured correctly. Make sure Windows Firewall and any other security software are allowing port 30609 (previously on build 202 7777 and/or 7778) through.</p>
             </div>
             
             <div class="troubleshooting-step" id="cgnat">
@@ -226,7 +226,7 @@
     " viewBox="0 0 24 24">
         <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
     </svg>
-    This guide was last updated for Build 202
+    This guide was last updated for Build B323
 </div>
                 <h4>Prerequisites</h4>
                 <ul>
@@ -272,54 +272,31 @@ apt install steamcmd</code></pre>
 cp -r /srv/puck-download/* /srv/puck/server1/
 chown -R puckd:puckd /srv/puck/server1
 chmod +x /srv/puck/server1/start_server.sh
-chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
+chmod +x /srv/puck/server1/Puck</code></pre>
             
             <h3>Step 7: Create Server Configuration</h3>
-            <pre><code>nano /srv/puck/server1/config.json</code></pre>
+            <pre><code>nano /srv/puck/server1/server_config.json</code></pre>
             <p>Paste and modify as needed:</p>
             <pre class="language-json"><code>{
-  "port": 7777,
-  "pingPort": 7778,
-  "name": "My Dedicated Puck Server",
-  "maxPlayers": 10,
-  "password": "",
-  "voip": false,
+  "port": 30609,
+  "name": "CODIONS PUCK GUIDE' TEST SERVER",
+  "maxPlayers": 12,
+  "password": null,
+  "tickRate": 200,
   "isPublic": true,
-  "adminSteamIds": [],
-  "reloadBannedSteamIds": false,
-  "usePuckBannedSteamIds": true,
-  "printMetrics": true,
-  "kickTimeout": 300,
-  "sleepTimeout": 60,
-  "joinMidMatchDelay": 10,
-  "targetFrameRate": 120,
-  "serverTickRate": 100,
-  "clientTickRate": 200,
-  "startPaused": false,
-  "allowVoting": true,
-  "phaseDurationMap": {
-    "Warmup": 600,
-    "FaceOff": 3,
-    "Playing": 300,
-    "BlueScore": 5,
-    "RedScore": 5,
-    "Replay": 10,
-    "PeriodOver": 15,
-    "GameOver": 15
-  },
+  "useVoip": false,
+  "useWhitelist": false,
   "mods": [
     {
-      "id": 3493628417,
-      "enabled": false,
-      "clientRequired": true
-    },
-    {
-      "id": 3491056040,
-      "enabled": true,
-      "clientRequired": false
+      "id": "3721801263",
+      "isEnabled": true,
+      "isClientRequired": false
     }
-  ]
+  ],
+  "gameMode": "public",
+  "level": "default"
 }
+
 </code></pre>
 <div class="notice-blue">
   <h4>Important Settings</h4>
@@ -331,22 +308,16 @@ chmod +x /srv/puck/server1/Puck.x86_64</code></pre>
       </ul>
     </li>
     <li>
-      <strong>Port:</strong> Set the port number (default is 7777)
+      <strong>Port:</strong> Set the port number (default is 30609)
       <ul>
         <li>This is the port you will either <a href="#portforwardGuide">forward</a> (in your modem/router panel) or you can enable <a href="#upnpGuide">UPnP</a>.</li>
       </ul>
     </li>
     <li>
-      <strong>targetFrameRate:</strong> The actual FPS the server will attempt to run at. Recommended to set this value 10-20 above tickRate.
+      <strong>tickRate:</strong> The actual FPS the server will attempt to run at. Recommended to set this value 10-20 above tickRate.
     </li>
     <li>
-      <strong>serverTickRate:</strong> This is essentially the "data rate" of the server. Recommended values are 240-360Hz+ if your hardware & network can handle it.
-    </li>
-    <li>
-      <strong>clientTickRate:</strong> The rate at which players send input updates to the server (should improve input lag). You can experiment with this value - I set mine to the same as the serverTickRate.
-    </li>
-    <li>
-      <strong>Mods:</strong> The example configuration will add Toaster's Crispy Shadows (3493628417) as a client-sided mod and GAFURIX' Custom MOTD (3491056040) as a server-sided mod to your server.
+      <strong>Mods:</strong> The example configuration will add GAFURIX' Custom MOTD (3721801263) as a server-sided mod to your server.
     </li>
   </ul>
 </div>
@@ -361,7 +332,7 @@ After=network.target
 [Service]
 WorkingDirectory=/srv/puck/%i
 User=puckd
-ExecStart=/srv/puck/%i/start_server.sh --serverConfigurationPath /srv/puck/%i/config.json
+ExecStart=/srv/puck/%i/start_server.sh --serverConfigPath /srv/puck/%i/server_config.json
 Restart=on-failure
 
 [Install]
@@ -379,13 +350,13 @@ journalctl -u puck@server1 -f</code></pre>
             <p>By default, Debian has no firewall configured, meaning all ports are open. On a VPS, this is a security risk.</p>
             
             <blockquote>
-                <strong>Install <code>ufw</code> and open required UDP ports</strong>
+                <strong>Install <code>ufw</code> and open required UDP port</strong>
             </blockquote>
             <pre><code>apt install ufw
 ufw enable
-ufw allow 7777/udp
-ufw allow 7778/udp</code></pre>
-            <p>Adjust port numbers based on your configuration.</p>
+ufw allow 30609/udp
+</code></pre>
+            <p>Adjust port number based on your configuration.</p>
 
 <hr>
             
@@ -398,9 +369,11 @@ ufw allow 7778/udp</code></pre>
             <h3>Step 2: Configure New Server Ports</h3>
             <p>Edit the configuration file and change the port numbers:</p>
             <blockquote>
-                <strong>Change ports to one above both, example 7779 & 7780</strong>
+                <strong>Change ports to one above, example 30610 and open it</strong>
             </blockquote>
-            <pre><code>nano /srv/puck/server2/config.json</code></pre>
+            <pre><code>nano /srv/puck/server2/server_config.json 
+ufw allow 30610/udp</code></pre>
+            
             
             <h3>Step 3: Set File Permissions</h3>
             <blockquote>
@@ -419,6 +392,109 @@ ufw allow 7778/udp</code></pre>
             
             <p>Check if it's working with logs:</p>
             <pre><code>journalctl -u puck@server2 -f</code></pre>
+
+            <div class="notice-blue">
+                <h4>Additional configuration</h4>
+                <p>In the latest build you can configure many things including the gamemode itself within the servers directory, here are some examples copied from the developer himself:</p>
+
+                <h5>Public</h5>
+                <ul>
+                    <li><code>phaseDurationMap</code> — Duration in seconds for each game phase <em>(defaults below)</em>
+                    <ul>
+                        <li><code>None</code> — 0s</li>
+                        <li><code>Warmup</code> — 60s</li>
+                        <li><code>PreGame</code> — 10s</li>
+                        <li><code>FaceOff</code> — 5s</li>
+                        <li><code>Play</code> — 300s</li>
+                        <li><code>BlueScore</code> — 5s</li>
+                        <li><code>RedScore</code> — 5s</li>
+                        <li><code>Replay</code> — 10s</li>
+                        <li><code>Intermission</code> — 10s</li>
+                        <li><code>GameOver</code> — 30s</li>
+                        <li><code>PostGame</code> — 10s</li>
+                    </ul>
+                    </li>
+                    <li><code>spawnDelay</code> — Seconds to wait before spawning players at the start of a phase <em>(default: 5)</em></li>
+                    <li><code>maxPeriods</code> — Number of periods per game <em>(default: 3)</em></li>
+                </ul>
+
+                <p>Sample Public game mode config:</p>
+                <pre class="language-json"><code>{
+"phaseDurationMap": {
+    "None": 0,
+    "Warmup": 60,
+    "PreGame": 10,
+    "FaceOff": 5,
+    "Play": 300,
+    "BlueScore": 5,
+    "RedScore": 5,
+    "Replay": 10,
+    "Intermission": 10,
+    "GameOver": 30,
+    "PostGame": 10
+},
+"spawnDelay": 5,
+"maxPeriods": 3
+}</code></pre>
+
+                <h5>Competitive</h5>
+                <ul>
+                    <li>All fields from Public config</li>
+                    <li><code>teamAssignments</code> — Maps each team to an array of Steam IDs pre-assigned to it; players not listed are put into spectator <em>(default: {})</em></li>
+                </ul>
+
+                <p>Sample Competitive game mode config:</p>
+                <pre class="language-json"><code>{
+"teamAssignments": {
+    "Blue": [
+    "76561198000000000",
+    "76561198000000001",
+    "76561198000000002"
+    ],
+    "Red": [
+    "76561198000000003",
+    "76561198000000004",
+    "76561198000000005"
+    ]
+},
+"phaseDurationMap": {
+    "None": 0,
+    "Warmup": 60,
+    "PreGame": 10,
+    "FaceOff": 5,
+    "Play": 300,
+    "BlueScore": 5,
+    "RedScore": 5,
+    "Replay": 10,
+    "Intermission": 10,
+    "GameOver": 30,
+    "PostGame": 10
+},
+"spawnDelay": 5,
+"maxPeriods": 3
+}</code></pre>
+<h4>Puck Dedicated Server CLI Arguments</h4>
+
+  <h5>Server File Paths</h5>
+  <ul>
+    <li><code>--logPath</code> — Path to the log output file <em>(default: ./Logs/Puck.log)</em></li>
+    <li><code>--adminSteamIdsPath</code> — Path to the admin Steam IDs JSON file <em>(default: ./admin_steam_ids.json)</em></li>
+    <li><code>--bannedSteamIdsPath</code> — Path to the banned Steam IDs JSON file <em>(default: ./banned_steam_ids.json)</em></li>
+    <li><code>--bannedIpAddressesPath</code> — Path to the banned IP addresses JSON file <em>(default: ./banned_ip_addresses.json)</em></li>
+    <li><code>--whitelistedSteamIdsPath</code> — Path to the server whitelist JSON file <em>(default: ./whitelisted_steam_ids.json)</em></li>
+    <li><code>--serverConfigPath</code> — Path to the server config JSON file <em>(default: ./server_config.json)</em></li>
+    <li><code>--publicGameModeConfigPath</code> — Path to the public game mode config JSON file <em>(default: ./public_game_mode_config.json)</em></li>
+    <li><code>--competitiveGameModeConfigPath</code> — Path to the competitive game mode config JSON file <em>(default: ./competitive_game_mode_config.json)</em></li>
+  </ul>
+
+  <h5>Server Inline Config</h5>
+  <ul>
+    <li><code>--serverConfig</code> — Inline serialized server config JSON, used instead of loading from a file</li>
+    <li><code>--publicGameModeConfig</code> — Inline serialized public game mode config JSON, used instead of loading from a file</li>
+    <li><code>--competitiveGameModeConfig</code> — Inline serialized competitive game mode config JSON, used instead of loading from a file</li>
+  </ul>
+
+            </div>
             
             <h2>Server Management Commands</h2>
             <ul>
@@ -437,13 +513,12 @@ ufw allow 7778/udp</code></pre>
 
             <p>Your Puck server should now be live and ready for players.</p>
 
-
         </section>
     </main>
 
     <footer>
-        <p>Quickly put together by Codion</p>
-        <small>2025</small>
+        <p>Quickly put together by #15 Codion</p>
+        <small>2026</small>
     </footer>
 </body>
 <script>
