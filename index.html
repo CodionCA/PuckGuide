@@ -23,6 +23,24 @@
 		<link rel="stylesheet" href="./assets/style.css" />
 		<link rel="icon" href="./assets/images/favicon.png" />
 		<link rel="apple-touch-icon" href="./assets/images/favicon.png" />
+
+		<!-- Prism.js syntax highlighting (theme styles live in style.css) -->
+		<script
+			defer
+			src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"
+			crossorigin="anonymous"></script>
+		<script
+			defer
+			src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-json.min.js"
+			crossorigin="anonymous"></script>
+		<script
+			defer
+			src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-ini.min.js"
+			crossorigin="anonymous"></script>
+		<script
+			defer
+			src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-bash.min.js"
+			crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<header>
@@ -155,12 +173,24 @@
 						adjusted.
 					</p>
 					<div class="video-container">
-						<video autoplay loop muted playsinline>
-							<source src="assets/images/24fpsexample.mp4" type="video/mp4" />
-						</video>
-						<video autoplay loop muted playsinline>
-							<source src="assets/images/280fpsexample.mp4" type="video/mp4" />
-						</video>
+						<figure>
+							<video autoplay loop muted playsinline>
+								<source src="assets/images/24fpsexample.mp4" type="video/mp4" />
+							</video>
+							<figcaption>
+								24 FPS (low tick rate) — sluggish, laggy mouse
+							</figcaption>
+						</figure>
+						<figure>
+							<video autoplay loop muted playsinline>
+								<source
+									src="assets/images/280fpsexample.mp4"
+									type="video/mp4" />
+							</video>
+							<figcaption>
+								280 FPS (high tick rate) — responsive and smooth
+							</figcaption>
+						</figure>
 					</div>
 				</div>
 			</section>
@@ -312,20 +342,8 @@
 					links to make it cheaper (and why not) and I may earn credit, VPS.org
 					gives you $50 in free credit.
 				</blockquote>
-				<ul
-					style="
-						list-style: none;
-						padding: 0;
-						display: grid;
-						grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-						gap: 16px;
-					">
-					<li
-						style="
-							border: 1px solid #ccc;
-							border-radius: 12px;
-							padding: 1.25rem;
-						">
+				<ul class="vps-providers">
+					<li>
 						<strong
 							><a href="https://vps.org/?ref=DZC3SZNC" target="_blank"
 								>VPS.org</a
@@ -338,12 +356,7 @@
 							servers. Ideal if you're on a tight budget.
 						</p>
 					</li>
-					<li
-						style="
-							border: 1px solid #ccc;
-							border-radius: 12px;
-							padding: 1.25rem;
-						">
+					<li>
 						<strong
 							><a href="https://www.vultr.com/?ref=9765895" target="_blank"
 								>Vultr</a
@@ -375,28 +388,8 @@
 
 				<h2>Server Setup & Configuration</h2>
 				<div class="notice-blue">
-					<div
-						style="
-							display: inline-flex;
-							align-items: center;
-							background: rgba(255, 255, 255, 0.1);
-							color: #e9ecef;
-							padding: 8px 12px;
-							border-radius: 6px;
-							font-size: 14px;
-							font-weight: 500;
-							border: 1px solid rgba(255, 255, 255, 0.15);
-							margin-top: 16px;
-						">
-						<svg
-							style="
-								width: 16px;
-								height: 16px;
-								margin-right: 8px;
-								fill: currentColor;
-								opacity: 0.8;
-							"
-							viewBox="0 0 24 24">
+					<div class="build-badge">
+						<svg viewBox="0 0 24 24">
 							<path
 								d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" />
 						</svg>
@@ -406,7 +399,7 @@
 					<ul>
 						<li>
 							A Debian-based (Debian 13 Trixie) server with SSH access
-							<small style="color: #6c757d">
+							<small style="color: var(--text-light)">
 								(Debian 12 Bookworm uses the same/similar steps)</small
 							>
 						</li>
@@ -435,7 +428,8 @@
 				</div>
 
 				<h3>Step 1: Update Your System</h3>
-				<pre><code>apt update && apt upgrade -y</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">apt update && apt upgrade -y</code></pre>
 
 				<h3>Step 2: Install Prerequisites & SteamCMD</h3>
 				<p>Install necessary tools and prepare SteamCMD:</p>
@@ -445,7 +439,8 @@
 						Ubuntu you may not</strong
 					>
 				</blockquote>
-				<pre><code>apt install software-properties-common
+				<pre
+					class="language-bash"><code class="language-bash">apt install software-properties-common
 echo "deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware" &gt; /etc/apt/sources.list.d/nonfree.list
 dpkg --add-architecture i386
 apt update
@@ -456,11 +451,13 @@ apt install steamcmd</code></pre>
 				</blockquote>
 
 				<h3>Step 3: Create Server Download Directory</h3>
-				<pre><code>mkdir -p /srv/puck-download</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">mkdir -p /srv/puck-download</code></pre>
 
 				<h3>Step 4: Download Puck Server Files</h3>
 				<p>Use SteamCMD to download the server files:</p>
-				<pre><code>/usr/games/steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">/usr/games/steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit</code></pre>
 				<p>
 					<strong>Note:</strong> 3481440 is the Steam App ID for Puck's
 					dedicated server. You can verify it on
@@ -470,20 +467,23 @@ apt install steamcmd</code></pre>
 
 				<h3>Step 5: Create System User for Running Server</h3>
 				<p>Create a dedicated system user for running the server:</p>
-				<pre><code>adduser --system --no-create-home --group puckd</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">adduser --system --no-create-home --group puckd</code></pre>
 
 				<h3>Step 6: Set Up the First Server Instance</h3>
 				<p>Create the server directory and assign permissions:</p>
-				<pre><code>mkdir -p /srv/puck/server1
+				<pre
+					class="language-bash"><code class="language-bash">mkdir -p /srv/puck/server1
 cp -r /srv/puck-download/* /srv/puck/server1/
 chown -R puckd:puckd /srv/puck/server1
 chmod +x /srv/puck/server1/start_server.sh
 chmod +x /srv/puck/server1/Puck</code></pre>
 
 				<h3>Step 7: Create Server Configuration</h3>
-				<pre><code>nano /srv/puck/server1/server_config.json</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">nano /srv/puck/server1/server_config.json</code></pre>
 				<p>Paste and modify as needed:</p>
-				<pre class="language-json"><code>{
+				<pre class="language-json"><code class="language-json">{
   "port": 30609,
   "name": "MY PUCK SERVER - GUIDE",
   "maxPlayers": 12,
@@ -536,7 +536,7 @@ chmod +x /srv/puck/server1/Puck</code></pre>
 							<strong>Mods:</strong> The example configuration has no mods, feel
 							free to browse the workshop and add one like "Gafurix' Custom
 							Motd" in the mods section:
-							<pre><code>{
+							<pre class="language-json"><code class="language-json">{
 "id": "3721801263",
 "isEnabled": true,
 "isClientRequired": false
@@ -546,9 +546,10 @@ chmod +x /srv/puck/server1/Puck</code></pre>
 				</div>
 
 				<h3>Step 8: Create systemd Unit</h3>
-				<pre><code>nano /etc/systemd/system/puck@.service</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">nano /etc/systemd/system/puck@.service</code></pre>
 				<p>Paste:</p>
-				<pre class="language-ini"><code>[Unit]
+				<pre class="language-ini"><code class="language-ini">[Unit]
 Description=Puck Dedicated Server - %i
 After=network.target
 
@@ -557,16 +558,43 @@ WorkingDirectory=/srv/puck/%i
 User=puckd
 ExecStart=/srv/puck/%i/start_server.sh --serverConfigPath /srv/puck/%i/server_config.json
 Restart=on-failure
+RestartSec=5
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/srv/puck/%i
 
 [Install]
 WantedBy=multi-user.target</code></pre>
+				<div class="notice-blue">
+					<h5>About the hardening lines</h5>
+					<p>
+						These five directives sandbox the server without breaking it.
+						<code>ProtectSystem=strict</code> makes the entire filesystem
+						read-only to the service except for paths in
+						<code>ReadWritePaths</code> so Puck can still write logs to
+						<code>/srv/puck/%i</code> but can't touch anything else on the
+						system. <code>ProtectHome</code> blocks user home dirs,
+						<code>PrivateTmp</code> gives the service its own <code>/tmp</code>,
+						and <code>NoNewPrivileges</code> blocks privilege escalation.
+					</p>
+					<p>
+						Check the score with:
+						<code>systemd-analyze security puck@server1</code>
+					</p>
+				</div>
 
 				<h3>Step 9: Enable and Start the Server</h3>
-				<pre><code>systemctl daemon-reload
+				<pre
+					class="language-bash"><code class="language-bash">systemctl daemon-reload
 systemctl enable puck@server1
 systemctl start puck@server1</code></pre>
 				<p>Check status:</p>
-				<pre><code>systemctl status puck@server1
+				<pre
+					class="language-bash"><code class="language-bash">systemctl status puck@server1
 journalctl -u puck@server1 -f</code></pre>
 
 				<h3>Step 10: Open Firewall Ports</h3>
@@ -588,7 +616,7 @@ journalctl -u puck@server1 -f</code></pre>
 						server.
 					</p>
 				</div>
-				<pre><code>apt install ufw
+				<pre class="language-bash"><code class="language-bash">apt install ufw
 ufw allow ssh
 ufw allow 30609/tcp
 ufw allow 30609/udp
@@ -602,14 +630,16 @@ ufw enable
 
 				<h3>Step 1: Duplicate Server Files</h3>
 				<p>Copy the existing server instance to create a new one:</p>
-				<pre><code>cp -r /srv/puck/server1 /srv/puck/server2</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">cp -r /srv/puck/server1 /srv/puck/server2</code></pre>
 
 				<h3>Step 2: Configure New Server Ports</h3>
 				<p>Edit the configuration file and change the port numbers:</p>
 				<blockquote>
 					<strong>Change ports to one above, example 30610 and open it</strong>
 				</blockquote>
-				<pre><code>nano /srv/puck/server2/server_config.json
+				<pre
+					class="language-bash"><code class="language-bash">nano /srv/puck/server2/server_config.json
 ufw allow 30610/tcp
 ufw allow 30610/udp</code></pre>
 
@@ -618,18 +648,22 @@ ufw allow 30610/udp</code></pre>
 					<strong>Mods & Logging will break if you skip this step</strong>
 				</blockquote>
 				<p>Give ownership of the new files to the puckd user:</p>
-				<pre><code>chown -R puckd:puckd /srv/puck/server2</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">chown -R puckd:puckd /srv/puck/server2</code></pre>
 
 				<h3>Step 4: Enable Auto-Start</h3>
 				<p>Enable the new server to start automatically on boot:</p>
-				<pre><code>systemctl enable puck@server2</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">systemctl enable puck@server2</code></pre>
 
 				<h3>Step 5: Start and Monitor</h3>
 				<p>Start the server:</p>
-				<pre><code>systemctl start puck@server2</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">systemctl start puck@server2</code></pre>
 
 				<p>Check if it's working with logs:</p>
-				<pre><code>journalctl -u puck@server2 -f</code></pre>
+				<pre
+					class="language-bash"><code class="language-bash">journalctl -u puck@server2 -f</code></pre>
 
 				<div class="notice-blue">
 					<h4>Additional configuration</h4>
@@ -669,7 +703,7 @@ ufw allow 30610/udp</code></pre>
 					</ul>
 
 					<p>Sample Public game mode config:</p>
-					<pre class="language-json"><code>{
+					<pre class="language-json"><code class="language-json">{
 "phaseDurationMap": {
     "None": 0,
     "Warmup": 60,
@@ -698,7 +732,7 @@ ufw allow 30610/udp</code></pre>
 					</ul>
 
 					<p>Sample Competitive game mode config:</p>
-					<pre class="language-json"><code>{
+					<pre class="language-json"><code class="language-json">{
 "teamAssignments": {
     "Blue": [
     "76561198000000000",
@@ -796,10 +830,11 @@ ufw allow 30610/udp</code></pre>
 				<h3>Updating the Server</h3>
 				<p>
 					Stop the server, re-pull the latest files with SteamCMD, then sync
-					them into your instance. Excluding configs so you don't delete your
+					them into your instance — excluding configs so you don't nuke your
 					settings:
 				</p>
-				<pre><code>systemctl stop puck@server1
+				<pre
+					class="language-bash"><code class="language-bash">systemctl stop puck@server1
 /usr/games/steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit
 rsync -a --exclude='*.json' /srv/puck-download/ /srv/puck/server1/
 chown -R puckd:puckd /srv/puck/server1
@@ -845,9 +880,10 @@ systemctl start puck@server1</code></pre>
 	</script>
 
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"
-		integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg="
-		crossorigin="anonymous"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/5.0.0/anchor.min.js"
+		integrity="sha512-byAcNWVEzFfu+tZItctr+WIMUJvpzT2kokkqcBq+VsrM3OrC5Aj9E2gh+hHpU0XNA3wDmX4sDbV5/nkhvTrj4w=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script>
 	<script>
 		anchors.add();
 	</script>
