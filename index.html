@@ -18,7 +18,6 @@
 		<meta
 			property="og:image"
 			content="https://codionca.github.io/PuckGuide/assets/images/favicon.png" />
-		<meta property="og:color" content="#fcbb0a" />
 		<meta name="theme-color" content="#fcbb0a" />
 
 		<link rel="stylesheet" href="./assets/style.css" />
@@ -55,9 +54,11 @@
 				<h2>Getting Started - The Simple Way</h2>
 
 				<p>
-					There are TWO different ways of hosting your own Puck server, one is
-					to simply open your game up normally and open the "SERVER BROWSER"
-					menu and select "NEW SERVER" at the bottom
+					There are TWO different ways of hosting your own Puck server. The
+					simple way (covered here) is to open the game normally, head to the
+					"SERVER BROWSER" menu, and click "NEW SERVER" at the bottom. The
+					advanced way (a dedicated Linux server) is covered
+					<a href="#advancedGuide">further down</a>.
 				</p>
 
 				<div class="image-container">
@@ -76,9 +77,9 @@
 							<ul>
 								<li>
 									<em
-										>Self Hosted means on your own system and network, Dedicated
-										uses Pucks own servers however are limited in Tick rate and
-										can feel quite <a href="#tickrate">sluggish</a></em
+										>Self Hosted means on your own system and network. Dedicated
+										uses Puck's official servers, but they're limited in tick
+										rate and can feel <a href="#tickrate">sluggish</a></em
 									>
 								</li>
 							</ul>
@@ -108,7 +109,7 @@
 								<li>
 									This is the port you will either
 									<a href="#portforwardGuide">forward</a> (in your modem/router
-									panel) or you can enable <a href="#upnpGuide">UPNP</a>
+									panel) or you can enable <a href="#upnpGuide">UPnP</a>
 								</li>
 							</ul>
 						</li>
@@ -143,7 +144,7 @@
 					<p>
 						<em
 							>This method relies on good ping and framerate. Dedicated servers
-							are limited to 200hz/200fps. Self-hosted servers need solid
+							are limited to 200 Hz / 200 FPS. Self-hosted servers need solid
 							network and system specs for higher refresh rates.</em
 						>
 					</p>
@@ -256,8 +257,8 @@
 					<p>
 						Your PC's firewall might be blocking the connection even when your
 						router is configured correctly. Make sure Windows Firewall and any
-						other security software are allowing port 30609 (previously on build
-						202 7777 and/or 7778) through.
+						other security software are allowing port 30609 through (on build
+						B202 this was ports 7777 and/or 7778).
 					</p>
 				</div>
 
@@ -275,7 +276,7 @@
 					</p>
 					<p>
 						<strong>Solution:</strong> Use a paid VPS provider instead (see
-						guides below).
+						<a href="#advancedGuide">the advanced guide below</a>).
 					</p>
 				</div>
 
@@ -307,7 +308,7 @@
 				<blockquote>
 					The following providers are recommended for hosting. The cheapest plan
 					is not always the best, look for 1-2 cores + 2GB RAM — both options
-					below have cheap plans that meet this requirement. Both are affiliant
+					below have cheap plans that meet this requirement. Both are affiliate
 					links to make it cheaper (and why not) and I may earn credit, VPS.org
 					gives you $50 in free credit.
 				</blockquote>
@@ -403,10 +404,12 @@
 					</div>
 					<h4>Prerequisites</h4>
 					<ul>
-						<li>A Debian-based (Debian 13 Trixie) server with SSH access</li>
-						<small style="color: #6c757d"
-							>(Debian 12 Bookworm uses the same/similar steps)</small
-						>
+						<li>
+							A Debian-based (Debian 13 Trixie) server with SSH access
+							<small style="color: #6c757d">
+								(Debian 12 Bookworm uses the same/similar steps)</small
+							>
+						</li>
 						<li>Root access and preferably a dedicated sudo user</li>
 						<li>At least 2GB of memory (each Puck server uses ~300MB)</li>
 						<li>Basic command line knowledge</li>
@@ -443,10 +446,14 @@
 					>
 				</blockquote>
 				<pre><code>apt install software-properties-common
-echo "deb http://deb.debian.org/debian bookworm main contrib non-free" &gt; /etc/apt/sources.list.d/nonfree.list
+echo "deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware" &gt; /etc/apt/sources.list.d/nonfree.list
 dpkg --add-architecture i386
 apt update
 apt install steamcmd</code></pre>
+				<blockquote>
+					<strong>Note:</strong> If you're on Debian 12 Bookworm, replace
+					<code>trixie</code> with <code>bookworm</code> in the line above.
+				</blockquote>
 
 				<h3>Step 3: Create Server Download Directory</h3>
 				<pre><code>mkdir -p /srv/puck-download</code></pre>
@@ -573,10 +580,19 @@ journalctl -u puck@server1 -f</code></pre>
 						>Install <code>ufw</code> and open required TCP & UDP port</strong
 					>
 				</blockquote>
+				<div class="notice">
+					<h5>⚠️ Don't lock yourself out</h5>
+					<p>
+						If you're on a remote VPS, allow SSH <strong>before</strong> running
+						<code>ufw enable</code> or you will be kicked out of your own
+						server.
+					</p>
+				</div>
 				<pre><code>apt install ufw
-ufw enable
+ufw allow ssh
 ufw allow 30609/tcp
 ufw allow 30609/udp
+ufw enable
 </code></pre>
 				<p>Adjust port number based on your configuration.</p>
 
@@ -593,9 +609,9 @@ ufw allow 30609/udp
 				<blockquote>
 					<strong>Change ports to one above, example 30610 and open it</strong>
 				</blockquote>
-				<pre><code>nano /srv/puck/server2/server_config.json 
-ufw allow 30609/tcp
-ufw allow 30609/udp</code></pre>
+				<pre><code>nano /srv/puck/server2/server_config.json
+ufw allow 30610/tcp
+ufw allow 30610/udp</code></pre>
 
 				<h3>Step 3: Set File Permissions</h3>
 				<blockquote>
@@ -775,11 +791,24 @@ ufw allow 30609/udp</code></pre>
 					<li>View logs: <code>journalctl -u puck@server1 -f</code></li>
 					<li>Restart: <code>systemctl restart puck@server1</code></li>
 					<li>Stop: <code>systemctl stop puck@server1</code></li>
-					<li>
-						Update: Stop server, re-run SteamCMD in
-						<code>/srv/puck-download</code>, copy over updated files.
-					</li>
 				</ul>
+
+				<h3>Updating the Server</h3>
+				<p>
+					Stop the server, re-pull the latest files with SteamCMD, then sync
+					them into your instance. Excluding configs so you don't delete your
+					settings:
+				</p>
+				<pre><code>systemctl stop puck@server1
+/usr/games/steamcmd +force_install_dir /srv/puck-download +login anonymous +app_update 3481440 +quit
+rsync -a --exclude='*.json' /srv/puck-download/ /srv/puck/server1/
+chown -R puckd:puckd /srv/puck/server1
+systemctl start puck@server1</code></pre>
+				<p>
+					Repeat the <code>rsync</code> + <code>chown</code> +
+					<code>start</code>
+					steps for each additional instance (server2, server3, etc).
+				</p>
 
 				<h2>Troubleshooting</h2>
 				<p>
@@ -798,15 +827,20 @@ ufw allow 30609/udp</code></pre>
 
 		<footer>
 			<p>Quickly put together by #15 Codion</p>
-			<small>2026</small>
+			<small>© 2026</small>
 		</footer>
 	</body>
 	<script>
-		$('a[href^="#"]').click(function (e) {
-			e.preventDefault();
-			$(window)
-				.stop(true)
-				.scrollTo(this.hash, { duration: 500, interrupt: false });
+		document.querySelectorAll('a[href^="#"]').forEach((link) => {
+			link.addEventListener("click", (e) => {
+				const id = link.getAttribute("href");
+				if (id === "#" || id.length < 2) return;
+				const target = document.querySelector(id);
+				if (!target) return;
+				e.preventDefault();
+				target.scrollIntoView({ behavior: "smooth", block: "start" });
+				history.pushState(null, "", id);
+			});
 		});
 	</script>
 
