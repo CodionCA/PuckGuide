@@ -468,7 +468,11 @@
 					<code>bookworm</code> in the line below.
 				</blockquote>
 				<pre
-					class="language-bash"><code class="language-bash">echo "deb http://deb.debian.org/debian trixie contrib non-free" &gt; /etc/apt/sources.list.d/nonfree.list
+					class="language-bash"><code class="language-bash">cat &gt; /etc/apt/sources.list.d/steamcmd.list &lt;&lt; 'EOF'
+deb [arch=i386] http://deb.debian.org/debian trixie main non-free
+deb [arch=i386] http://deb.debian.org/debian trixie-updates main non-free
+deb [arch=i386] http://deb.debian.org/debian-security trixie-security main non-free
+EOF
 dpkg --add-architecture i386
 apt update
 apt install steamcmd rsync</code></pre>
