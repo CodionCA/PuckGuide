@@ -59,7 +59,7 @@
 
 @media (prefers-color-scheme: dark) {
 	.anchorjs-link {
-		color: #ff5231;
+		color: var(--text-light);
 	}
 
 	:root {
@@ -216,6 +216,12 @@ h3 {
 	}
 }
 
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
 /* Format links & buttons */
 a,
 a:visited {
@@ -251,7 +257,7 @@ input[type="button"] {
 	border-radius: 5px;
 	background: var(--accent);
 	font-size: 1rem;
-	color: var(--bg);
+	color: var(--button-text);
 	padding: 0.7rem 0.9rem;
 	margin: 0.5rem 0;
 }
@@ -524,7 +530,8 @@ input[type="file"] {
 /* Misc body elements */
 hr {
 	color: var(--border);
-	border-top: 1px;
+	border: 0;
+	border-top: 1px solid var(--border);
 	margin: 1rem auto;
 }
 
@@ -616,21 +623,6 @@ pre code {
 	stroke-width: 0;
 	stroke: currentColor;
 	fill: currentColor;
-}
-
-input[type="color" i] {
-	appearance: auto;
-	width: 50px;
-	height: 27px;
-	cursor: default;
-	box-sizing: border-box;
-	background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
-	color: -internal-light-dark(black, white);
-	border-width: 1px;
-	border-style: solid;
-	border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-	border-image: initial;
-	padding: 1px 2px;
 }
 
 .notice {
