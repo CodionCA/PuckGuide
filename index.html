@@ -222,11 +222,43 @@
 				<h2>Port Forwarding Setup</h2>
 
 				<p>
-					If players can't connect to your server, you need to open ports
-					<strong>30609</strong> (TCP & UDP) on your router. So long as you are
-					not behind a <a href="#cgnat">CGNAT</a>.
+					If players can't connect to your server, you need to open port
+					<strong>30609</strong> (TCP &amp; UDP) on your router, as long as you
+					are not behind <a href="#cgnat">CGNAT</a>.
 				</p>
 
+				<p>
+					<strong>Why?</strong> Think of your public IP as your building's
+					street address and a port as an apartment number. Every device in your
+					home shares that one address. When a player shows up asking for
+					apartment 30609, your router (the front desk) has no idea who lives
+					there, so it turns them away. A port forward tells the front desk:
+					anyone asking for 30609 goes to this PC.
+				</p>
+
+				<details>
+					<summary>Is port forwarding safe?</summary>
+					<p>
+						A port forward exposes one port on one PC, nothing else. It is only
+						as safe as the program listening on that port. Keep your server
+						(Host PC + Game) updated, forward only the port you need, and delete
+						the rule when you stop hosting. Don't use your router's DMZ setting
+						as a shortcut; it forwards every port to your PC instead of just
+						one.
+					</p>
+				</details>
+
+				<details>
+					<summary>Do I need this to play on my friends server?</summary>
+					<p>
+						For Puck, only to host. Joining someone else's server works without
+						it, because your PC starts that connection and your router lets the
+						reply back in. Hosting is the opposite: players start the
+						connection, so your router needs to know where to send them.
+					</p>
+				</details>
+
+				<h3>Quick & Rough Guide</h3>
 				<p>
 					<strong>Access your router's admin panel:</strong> Run
 					<code>ipconfig</code> in Windows Terminal, copy the "Default Gateway"
@@ -247,6 +279,13 @@
 				</ul>
 
 				<h3>Port Forwarding Guides by Router Brand</h3>
+				<p>
+					Router/Modem (Typically a combo unit) came from your internet
+					provider? Example: Xfinity, Spectrum, Cox, and Rogers handle can/might
+					only port forwarding in their mobile app instead of or in addition to
+					the web admin page, check their specific instructions if this is the
+					case.
+				</p>
 				<ul>
 					<li>
 						<a
@@ -284,9 +323,10 @@
 				<h3 id="upnpGuide">Enabling UPnP</h3>
 				<p>
 					<strong>Alternative:</strong> You can enable UPnP instead of manual
-					port forwarding. This is less reliable but automatically handles port
-					forwarding for all applications. Look for a UPnP toggle in your router
-					admin settings (usually at <code>192.168.1.1</code>).
+					port forwarding. This is less reliable (by a lot) but can
+					automatically handle port forwarding for all applications. Look for a
+					UPnP toggle in your router admin settings (usually at
+					<code>192.168.1.1</code>).
 				</p>
 
 				<div class="notice">
@@ -328,7 +368,7 @@
 						<strong>How to check:</strong> Compare your router's WAN IP address
 						with your public IP from
 						<a href="https://ifconfig.io/" target="_blank">ifconfig.io</a>. If
-						they don't match, you're behind CGNAT.
+						they don't match, you're potentially behind CGNAT.
 					</p>
 					<p>
 						<strong>Solution:</strong> Use a paid VPS provider instead (see
